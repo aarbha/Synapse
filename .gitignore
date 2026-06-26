@@ -30,3 +30,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts.bak
+
+# Demo / scratch files that shouldn't be tracked
+public/svgs/index.html
+public/**/*.html
