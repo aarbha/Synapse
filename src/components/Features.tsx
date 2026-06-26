@@ -53,7 +53,7 @@ export function Features() {
             <div className="p-2 border border-[#114C5A] rounded-sm bg-black"><Box className="w-4 h-4 text-[#FFC801]" /></div>
           </div>
           <ScrollRevealText className="text-3xl md:text-5xl font-medium leading-tight mb-8 text-[#F1F6F4]">
-            Integrate with the world's most powerful neural engines. Seamlessly connect your custom data to GPT-4, Claude 3, and Perplexity for unmatched precision. Build agents that don't just process, they understand.
+            Integrate with the world's most powerful neural engines. Seamlessly connect your custom data to Claude Opus 4.8, GPT-5, Gemini 3, and Grok 4 for unmatched precision. Build agents that don't just process, they understand.
           </ScrollRevealText>
           <p className="text-[#D9E8E2]/70 text-lg">
             Unlock the full potential of LLM-native workflows. Our infrastructure ensures low latency and high-fidelity output for every request.

@@ -82,7 +82,7 @@ const tiers: Record<Tier, TierMeta> = {
     features: [
       'Unlimited active workflows',
       '50,000 monthly executions',
-      'Advanced AI agents + GPT-4 class',
+      'Advanced AI agents + Claude Opus 4.8 class',
       'Priority support, < 4h response',
       'Real-time analytics + custom reports',
       'Webhooks, REST & gRPC APIs',
