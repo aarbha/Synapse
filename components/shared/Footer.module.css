@@ -1,5 +1,5 @@
 .wrap {
-  padding-block: 64px 32px;
+  padding-block: 80px 32px;
   background: var(--bg-primary);
   border-top: 1px solid var(--border-dark);
   margin-top: 96px;
@@ -8,10 +8,12 @@
 .top {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 48px;
+  gap: 56px;
 }
 
-.brandBlock { max-width: 320px; }
+.brandBlock {
+  max-width: 320px;
+}
 
 .brand {
   display: inline-flex;
@@ -38,17 +40,17 @@
 }
 
 .tagline {
-  margin-top: 16px;
+  margin-top: 20px;
   font-size: 14px;
   color: var(--text-muted-dark);
-  line-height: 1.6;
-  max-width: 280px;
+  line-height: 1.65;
+  max-width: 300px;
 }
 
 .socials {
   display: flex;
   gap: 8px;
-  margin-top: 24px;
+  margin-top: 28px;
 }
 
 .social {
@@ -57,15 +59,18 @@
   justify-content: center;
   width: 36px;
   height: 36px;
-  border-radius: 8px;
+  border-radius: 50%;
   border: 1px solid var(--border-dark);
   color: var(--text-muted-dark);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
 }
 
 .social:hover {
-  color: var(--color-forsythia);
+  color: var(--color-oceanic-noir);
+  background: var(--color-forsythia);
   border-color: var(--color-forsythia);
-  background: rgba(255, 200, 1, 0.06);
 }
 
 .columns {
@@ -74,34 +79,45 @@
   gap: 32px;
 }
 
-.column { display: flex; flex-direction: column; gap: 12px; }
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
 
 .columnTitle {
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.06em;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--color-forsythia);
 }
 
-.column ul { display: flex; flex-direction: column; gap: 4px; }
+.column ul {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
 
 .colLink {
   display: inline-block;
   padding: 6px 0;
   font-size: 14px;
   color: var(--text-muted-dark);
+  font-family: var(--font-body);
 }
 
-.colLink:hover { color: var(--color-forsythia); }
+.colLink:hover {
+  color: var(--color-forsythia);
+}
 
 .trustBar {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  padding-block: 32px;
+  gap: 20px;
+  padding-block: 40px;
   border-top: 1px solid var(--border-dark);
-  margin-top: 48px;
+  margin-top: 64px;
 }
 
 .trustLabel {
@@ -109,29 +125,29 @@
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--text-muted-dark);
-}
-
-.logoStrip {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 24px 32px;
-  align-items: center;
-}
-
-.logoItem {
-  font-size: 16px;
   font-weight: 600;
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
   color: var(--text-muted-dark);
-  opacity: 0.7;
+  opacity: 0.6;
+  flex-shrink: 0;
+  user-select: none;
   transition: opacity var(--timing-micro) var(--ease-out);
 }
-.logoItem:hover { opacity: 1; color: var(--text-on-dark); }
+
+.logo:hover {
+  opacity: 1;
+}
 
 .bottom {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  padding-top: 24px;
+  padding-top: 32px;
   border-top: 1px solid var(--border-dark);
 }
 
@@ -144,8 +160,14 @@
 @media (min-width: 768px) {
   .top {
     grid-template-columns: 320px 1fr;
-    gap: 64px;
+    gap: 80px;
   }
-  .columns { grid-template-columns: repeat(4, 1fr); }
-  .bottom { flex-direction: row; justify-content: space-between; align-items: center; }
+  .columns {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .bottom {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
 }

@@ -1,31 +1,13 @@
-'use client';
-
-import dynamic from 'next/dynamic';
-import { PkgIcon, ArrowRightIcon } from '@/components/shared/IconsRef';
 import styles from './Hero.module.css';
-
-const HeroCanvas = dynamic(
-  () => import('./HeroCanvas').then((m) => m.default),
-  { ssr: false, loading: () => null }
-);
 
 export function Hero() {
   return (
     <div className={styles.hero}>
-      <div className={styles.bg} aria-hidden="true">
-        <HeroCanvas />
+      <div className="hero-bg" aria-hidden="true">
+        <span className="hero-blob-c" />
       </div>
-      <div className="hero-glow" aria-hidden="true" />
-
-      <span className={`${styles.floatAccent} ${styles.accentA}`} aria-hidden="true">
-        <PkgIcon src="/svgs/chart-pie.svg" size={48} alt="" />
-      </span>
-      <span className={`${styles.floatAccent} ${styles.accentB}`} aria-hidden="true">
-        <PkgIcon src="/svgs/link.svg" size={80} alt="" />
-      </span>
-      <span className={`${styles.floatAccent} ${styles.accentC}`} aria-hidden="true">
-        <PkgIcon src="/svgs/arrow-trending-up.svg" size={64} alt="" />
-      </span>
+      <div className="hero-grid" aria-hidden="true" />
+      <div className="hero-fade" aria-hidden="true" />
 
       <div className={`shell ${styles.content}`}>
         <span className={`enter-fade-up ${styles.pill} font-display`} style={{ animationDelay: '60ms' }}>
@@ -48,7 +30,7 @@ export function Hero() {
         <div className={`${styles.ctas} enter-fade-up`} style={{ animationDelay: '240ms' }}>
           <a href="#pricing" className="btn btn-primary">
             Start building free
-            <ArrowRightIcon size={16} />
+            <span className={styles.arrow} aria-hidden="true">→</span>
           </a>
           <a href="#features" className="btn btn-ghost">
             Explore the platform
@@ -60,12 +42,12 @@ export function Hero() {
             <span className={`${styles.statValue} font-display`}>99.99%</span>
             <span className={styles.statLabel}>Uptime SLA</span>
           </li>
-          <li className={styles.statDiv} aria-hidden="true" />
+          <li className={styles.stat} aria-hidden="true" />
           <li className={styles.stat}>
             <span className={`${styles.statValue} font-display`}>120+</span>
-            <span className={styles.statLabel}>Integrations</span>
+            <span className={styles.statLabel}>Native integrations</span>
           </li>
-          <li className={styles.statDiv} aria-hidden="true" />
+          <li className={styles.stat} aria-hidden="true" />
           <li className={styles.stat}>
             <span className={`${styles.statValue} font-display`}>50M+</span>
             <span className={styles.statLabel}>Executions / mo</span>

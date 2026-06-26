@@ -75,11 +75,11 @@ export function Accordion({ features, bridge }: AccordionProps) {
   }, [bridge.isMobile, bridge.activeIndex]);
 
   return (
-    <ul className={`accordion-stack ${styles.list}`} aria-label="Platform features accordion">
+    <ul className={`accordion-stack ${styles.list}`} aria-label="Platform features">
       {features.map((feature, index) => {
         const isOpen = bridge.activeIndex === index;
         return (
-          <li key={feature.id} className={styles.item}>
+          <li key={feature.id} className={`${styles.item} ${isOpen ? styles.itemOpen : ''}`}>
             <h3 className={styles.heading}>
               <button
                 type="button"
@@ -90,20 +90,18 @@ export function Accordion({ features, bridge }: AccordionProps) {
                 onClick={() => toggle(index)}
               >
                 <span className={styles.triggerInner}>
-                  <span className={styles.iconWrap}>
-                    <PkgIcon src={feature.icon} size={24} alt={`${feature.title} icon`} className={styles.icon} />
+                  <span className={styles.iconWrap} aria-hidden="true">
+                    <PkgIcon src={feature.icon} size={22} alt="" className={styles.icon} />
                   </span>
                   <span className={styles.triggerText}>
                     <span className={`${styles.triggerTitle} font-display`}>{feature.title}</span>
                     <span className={styles.triggerShort}>{feature.short}</span>
                   </span>
                 </span>
-                <img
+                <PkgIcon
                   src="/svgs/chevron-down.svg"
-                  width="20"
-                  height="20"
+                  size={20}
                   alt=""
-                  aria-hidden="true"
                   className={`${styles.chevron} ${isOpen ? styles.chevronOpen : ''}`}
                 />
               </button>

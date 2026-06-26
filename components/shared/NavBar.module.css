@@ -12,16 +12,16 @@
 
 .scrolled {
   border-bottom-color: var(--border-dark);
-  background: rgba(23, 43, 54, 0.92);
-  backdrop-filter: saturate(140%) blur(12px);
-  -webkit-backdrop-filter: saturate(140%) blur(12px);
+  background: rgba(23, 43, 54, 0.88);
+  backdrop-filter: saturate(140%) blur(16px);
+  -webkit-backdrop-filter: saturate(140%) blur(16px);
 }
 
 .inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 64px;
+  height: 68px;
   gap: 24px;
 }
 
@@ -30,13 +30,6 @@
   align-items: center;
   gap: 10px;
   color: var(--color-forsythia);
-}
-
-.brandName {
-  font-size: 16px;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  color: var(--text-on-dark);
 }
 
 .logoWrap {
@@ -53,6 +46,13 @@
 
 .brand:hover .logoWrap {
   transform: rotate(-8deg);
+}
+
+.brandName {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--text-on-dark);
 }
 
 .links {
@@ -111,6 +111,24 @@
 .menuBtn:hover {
   border-color: var(--color-forsythia);
   color: var(--color-forsythia);
+}
+
+.hamburger {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  width: 18px;
+  height: 14px;
+}
+
+.hamburger span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: currentColor;
+  border-radius: 1px;
+  transition: transform var(--timing-micro) var(--ease-out);
 }
 
 .mobileMenu {

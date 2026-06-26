@@ -1,18 +1,18 @@
 import { TRUSTED_LOGOS } from '@/lib/constants';
-import { GitHubIcon, XIcon, DiscordIcon, LogoMark } from './IconsRef';
+import { PkgIcon } from './IconsRef';
 import styles from './Footer.module.css';
 
 const FOOTER_COLUMNS = [
-  { title: 'Product',   links: ['Features', 'Pricing', 'Integrations', 'Changelog', 'Status'] },
-  { title: 'Developers',links: ['Documentation', 'SDK Reference', 'API', 'Guides', 'Examples'] },
-  { title: 'Company',   links: ['About', 'Blog', 'Careers', 'Security', 'Contact'] },
-  { title: 'Legal',     links: ['Privacy', 'Terms', 'DPA', 'SOC 2', 'GDPR'] },
+  { title: 'Product',    links: ['Features', 'Pricing', 'Integrations', 'Changelog', 'Status'] },
+  { title: 'Developers', links: ['Documentation', 'SDK Reference', 'API', 'Guides', 'Examples'] },
+  { title: 'Company',    links: ['About', 'Blog', 'Careers', 'Security', 'Contact'] },
+  { title: 'Legal',      links: ['Privacy', 'Terms', 'DPA', 'SOC 2', 'GDPR'] },
 ] as const;
 
 const SOCIALS = [
-  { href: 'https://github.com',   label: 'Synapse on GitHub',   Icon: GitHubIcon },
-  { href: 'https://x.com',        label: 'Synapse on X',        Icon: XIcon },
-  { href: 'https://discord.com',  label: 'Synapse Discord',     Icon: DiscordIcon },
+  { href: 'https://github.com',  label: 'GitHub',  text: 'GH' },
+  { href: 'https://x.com',       label: 'X',       text: 'X' },
+  { href: 'https://discord.com', label: 'Discord', text: 'DC' },
 ] as const;
 
 export function Footer() {
@@ -21,8 +21,8 @@ export function Footer() {
       <div className={styles.top}>
         <div className={styles.brandBlock}>
           <a href="#hero" className={`${styles.brand} interactive`} aria-label="Synapse home">
-            <span className={styles.logoWrap}>
-              <LogoMark size={24} aria-label="Synapse logo" />
+            <span className={styles.logoWrap} aria-hidden="true">
+              <PkgIcon src="/svgs/cube-16-solid.svg" size={18} alt="" />
             </span>
             <span className={`${styles.brandName} font-display`}>Synapse</span>
           </a>
@@ -30,16 +30,16 @@ export function Footer() {
             Where workflows interact. Build, ship, and scale AI automation with confidence.
           </p>
           <ul className={styles.socials}>
-            {SOCIALS.map(({ href, label, Icon }) => (
+            {SOCIALS.map(({ href, label, text }) => (
               <li key={href}>
                 <a
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`${styles.social} interactive`}
-                  aria-label={label}
+                  className={`${styles.social} font-display interactive`}
+                  aria-label={`Synapse on ${label}`}
                 >
-                  <Icon size={18} aria-label="" />
+                  {text}
                 </a>
               </li>
             ))}
@@ -66,18 +66,20 @@ export function Footer() {
 
       <div className={styles.trustBar}>
         <span className={`${styles.trustLabel} font-display`}>Trusted by teams at</span>
-        <ul className={styles.logoStrip}>
-          {TRUSTED_LOGOS.map((name) => (
-            <li key={name} className={`${styles.logoItem} font-display`}>
-              {name}
-            </li>
-          ))}
-        </ul>
+        <div className="marquee" role="img" aria-label="Trusted logos scrolling marquee">
+          <div className="marquee-track">
+            {[...TRUSTED_LOGOS, ...TRUSTED_LOGOS].map((name, i) => (
+              <span key={`${name}-${i}`} className={`${styles.logo} font-display`}>
+                {name}
+              </span>
+            ))}
+          </div>
+        </div>
       </div>
 
       <div className={styles.bottom}>
         <p className={styles.copy}>&copy; {new Date().getFullYear()} Synapse, Inc. All rights reserved.</p>
-        <p className={styles.made}>Built with Next.js · Native CSS · Three.js</p>
+        <p className={styles.made}>Built with Next.js · Native CSS · Zero animation libraries</p>
       </div>
     </div>
   );

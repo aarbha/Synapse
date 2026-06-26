@@ -10,40 +10,9 @@
   background: var(--bg-primary);
 }
 
-.bg {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-}
-
-.floatAccent {
-  position: absolute;
-  z-index: 1;
-  opacity: 0.5;
-  pointer-events: none;
-  color: var(--color-forsythia);
-}
-
-.accentA {
-  top: 22%;
-  left: 8%;
-  animation: float 7s ease-in-out infinite;
-}
-.accentB {
-  top: 30%;
-  right: 6%;
-  animation: drift 9s ease-in-out infinite;
-}
-.accentC {
-  bottom: 18%;
-  left: 14%;
-  animation: float 8s ease-in-out infinite reverse;
-}
-
 .content {
   position: relative;
-  z-index: 2;
+  z-index: 3;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -57,12 +26,14 @@
   gap: 8px;
   padding: 6px 12px 6px 10px;
   border-radius: 999px;
-  background: var(--color-nocturnal);
+  background: rgba(17, 76, 90, 0.4);
   border: 1px solid var(--border-dark);
   font-size: 11px;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--text-on-dark);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 .pillDot {
@@ -71,61 +42,80 @@
   border-radius: 50%;
   background: var(--color-forsythia);
   box-shadow: 0 0 0 4px rgba(255, 200, 1, 0.2);
-  animation: pulseGlow 2s ease-in-out infinite;
+  animation: pulseGlow 2.4s ease-in-out infinite;
 }
 
 .headline {
-  margin-top: 28px;
-  font-size: clamp(40px, 8vw, 80px);
+  margin-top: 32px;
+  font-size: clamp(40px, 8vw, 84px);
   font-weight: 800;
-  line-height: 1.05;
-  letter-spacing: -0.03em;
+  line-height: 1.04;
+  letter-spacing: -0.04em;
   max-width: 16ch;
   color: var(--text-on-dark);
 }
 
-.headline .accent-text {
-  color: var(--color-forsythia);
-}
-
 .subhead {
-  margin-top: 24px;
-  font-size: clamp(16px, 2vw, 18px);
+  margin-top: 28px;
+  font-size: clamp(16px, 1.8vw, 19px);
   font-family: var(--font-body);
   color: var(--text-muted-dark);
-  max-width: 60ch;
+  max-width: 58ch;
   line-height: 1.6;
 }
 
 .ctas {
-  margin-top: 36px;
+  margin-top: 40px;
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
   justify-content: center;
 }
 
+.arrow {
+  font-family: var(--font-body);
+  font-size: 16px;
+  display: inline-block;
+  transition: transform var(--timing-micro) var(--ease-out);
+}
+
+.btn:hover .arrow {
+  transform: translateX(3px);
+}
+
 .stats {
-  margin-top: 56px;
+  margin-top: 72px;
   display: flex;
-  align-items: center;
-  gap: 24px;
+  align-items: stretch;
+  gap: 0;
   flex-wrap: wrap;
   justify-content: center;
+  padding: 0;
+  border-top: 1px solid var(--border-dark);
+  border-bottom: 1px solid var(--border-dark);
+  width: 100%;
+  max-width: 720px;
 }
 
 .stat {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
   text-align: center;
+  padding: 24px 32px;
+  flex: 1 1 200px;
+}
+
+.stat + .stat {
+  border-left: 1px solid var(--border-dark);
 }
 
 .statValue {
-  font-size: 26px;
+  font-size: 28px;
   font-weight: 700;
   letter-spacing: -0.02em;
   color: var(--color-forsythia);
+  line-height: 1;
 }
 
 .statLabel {
@@ -133,16 +123,13 @@
   font-family: var(--font-body);
   color: var(--text-muted-dark);
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
+  font-weight: 500;
 }
 
-.statDiv {
-  width: 1px;
-  height: 32px;
-  background: var(--border-dark);
-}
-
-@media (max-width: 767px) {
-  .accentA, .accentB, .accentC { display: none; }
-  .statDiv { display: none; }
+@media (max-width: 640px) {
+  .stat + .stat {
+    border-left: none;
+    border-top: 1px solid var(--border-dark);
+  }
 }

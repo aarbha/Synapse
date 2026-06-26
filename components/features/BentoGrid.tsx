@@ -12,7 +12,7 @@ interface BentoGridProps {
 
 export function BentoGrid({ features, bridge }: BentoGridProps) {
   return (
-    <ul className={`bento-grid ${styles.grid}`} aria-label="Platform features bento grid">
+    <ul className={`bento-grid ${styles.grid}`} aria-label="Platform features">
       {features.map((feature, index) => {
         const isActive = bridge.activeIndex === index;
         return (
@@ -28,10 +28,12 @@ export function BentoGrid({ features, bridge }: BentoGridProps) {
             tabIndex={0}
           >
             <div className={styles.iconWrap}>
-              <PkgIcon src={feature.icon} size={36} alt={`${feature.title} icon`} className={styles.icon} />
+              <PkgIcon src={feature.icon} size={32} alt="" className={styles.icon} />
             </div>
-            <h3 className={`${styles.title} font-display`}>{feature.title}</h3>
-            <p className={styles.short}>{feature.short}</p>
+            <div className={styles.body}>
+              <h3 className={`${styles.title} font-display`}>{feature.title}</h3>
+              <p className={styles.short}>{feature.short}</p>
+            </div>
             <p className={`${styles.long} ${isActive ? styles.longOpen : ''}`}>
               {feature.long}
             </p>

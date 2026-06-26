@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { NAV_LINKS } from '@/lib/constants';
-import { LogoMark, MenuIcon, XMarkSvg } from './IconsRef';
+import { PkgIcon } from './IconsRef';
 import styles from './NavBar.module.css';
 
 export function NavBar() {
@@ -36,8 +36,8 @@ export function NavBar() {
     <nav aria-label="Primary" className={`${styles.nav} ${scrolled ? styles.scrolled : ''} interactive`}>
       <div className={`shell ${styles.inner}`}>
         <a href="#hero" className={styles.brand} onClick={closeMenu}>
-          <span className={styles.logoWrap}>
-            <LogoMark size={24} />
+          <span className={styles.logoWrap} aria-hidden="true">
+            <PkgIcon src="/svgs/cube-16-solid.svg" size={18} alt="Synapse logo" />
           </span>
           <span className={`${styles.brandName} font-display`}>Synapse</span>
         </a>
@@ -70,7 +70,15 @@ export function NavBar() {
           aria-label={open ? 'Close menu' : 'Open menu'}
           onClick={toggleMenu}
         >
-          {open ? <XMarkSvg size={20} /> : <MenuIcon size={22} />}
+          {open ? (
+            <PkgIcon src="/svgs/x-mark.svg" size={20} alt="" />
+          ) : (
+            <span className={styles.hamburger} aria-hidden="true">
+              <span />
+              <span />
+              <span />
+            </span>
+          )}
         </button>
       </div>
 

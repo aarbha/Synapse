@@ -1,21 +1,18 @@
 import { TESTIMONIALS, TRUSTED_LOGOS } from '@/lib/constants';
-import { StarIcon, QuoteIcon } from '@/components/shared/IconsRef';
 import styles from './Testimonials.module.css';
+
+function initials(name: string): string {
+  return name.split(' ').map((p) => p[0]).join('').slice(0, 2).toUpperCase();
+}
 
 function Stars() {
   return (
     <ul className={styles.stars} aria-label="5 out of 5 stars">
       {Array.from({ length: 5 }).map((_, i) => (
-        <li key={i}>
-          <StarIcon size={14} className={styles.star} />
-        </li>
+        <li key={i} className={styles.star} aria-hidden="true">★</li>
       ))}
     </ul>
   );
-}
-
-function initials(name: string): string {
-  return name.split(' ').map((p) => p[0]).join('').slice(0, 2).toUpperCase();
 }
 
 export function Testimonials() {
@@ -42,10 +39,8 @@ export function Testimonials() {
         {TESTIMONIALS.map((t) => (
           <li key={t.id}>
             <article className={`card ${styles.card}`}>
+              <span className={styles.quoteMark} aria-hidden="true">“</span>
               <figure className={styles.quote}>
-                <span className={styles.quoteMark} aria-hidden="true">
-                  <QuoteIcon size={36} />
-                </span>
                 <Stars />
                 <blockquote className={styles.quoteText}>{t.quote}</blockquote>
                 <figcaption className={styles.author}>

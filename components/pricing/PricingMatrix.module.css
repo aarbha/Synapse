@@ -1,7 +1,7 @@
 .matrix {
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 56px;
 }
 
 .controls {
@@ -22,14 +22,14 @@
 .tiers {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 16px;
+  gap: 20px;
 }
 
 @media (min-width: 768px) {
   .tiers {
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    align-items: start;
+    gap: 24px;
+    align-items: stretch;
   }
 }
 
@@ -37,9 +37,9 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  padding: 28px;
-  background: var(--color-arctic-powder);
+  gap: 20px;
+  padding: 32px;
+  background: var(--color-mystic-mint);
   border: 1px solid var(--border-light);
   border-radius: var(--radius-lg);
   color: var(--text-on-light);
@@ -50,10 +50,11 @@
 
 @media (min-width: 768px) {
   .featured {
-    transform: scale(1.03);
     border-color: var(--color-forsythia);
     border-width: 2px;
-    box-shadow: 0 0 0 1px var(--color-forsythia), 0 24px 48px -24px rgba(255, 200, 1, 0.55);
+    background: var(--color-arctic-powder);
+    box-shadow: 0 24px 48px -24px rgba(255, 200, 1, 0.45);
+    transform: translateY(-8px);
   }
 }
 
@@ -62,19 +63,19 @@
   top: -12px;
   left: 50%;
   transform: translateX(-50%);
-  padding: 4px 12px;
+  padding: 5px 14px;
   border-radius: 999px;
   background: var(--color-forsythia);
   color: var(--color-oceanic-noir);
   font-size: 10px;
   font-weight: 700;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   white-space: nowrap;
 }
 
 .tierName {
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 700;
   letter-spacing: -0.02em;
   color: var(--text-on-light);
@@ -83,8 +84,8 @@
 .tierTagline {
   font-size: 13px;
   color: var(--text-muted-light);
-  line-height: 1.5;
-  min-height: 2.5em;
+  line-height: 1.55;
+  min-height: 2.6em;
   font-family: var(--font-body);
 }
 
@@ -93,13 +94,14 @@
   align-items: baseline;
   flex-wrap: wrap;
   gap: 6px;
-  margin-top: 8px;
+  margin-top: 12px;
+  padding-bottom: 4px;
 }
 
 .price {
-  font-size: 42px;
+  font-size: 48px;
   font-weight: 800;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.04em;
   line-height: 1;
   color: var(--text-on-light);
 }
@@ -108,11 +110,12 @@
   font-family: var(--font-body);
   font-size: 13px;
   color: var(--text-muted-light);
+  font-weight: 500;
 }
 
 .savingsWrap {
-  margin: -4px 0 4px;
-  min-height: 20px;
+  margin: -8px 0 4px;
+  min-height: 22px;
 }
 
 .savingsHidden {
@@ -122,14 +125,14 @@
 
 .savings {
   display: inline-block;
-  padding: 3px 8px;
+  padding: 4px 10px;
   border-radius: 999px;
-  background: rgba(17, 76, 90, 0.10);
-  border: 1px solid rgba(17, 76, 90, 0.25);
-  font-size: 11px;
+  background: var(--color-oceanic-noir);
+  border: 1px solid var(--color-oceanic-noir);
+  font-size: 10px;
   font-weight: 700;
-  letter-spacing: 0.04em;
-  color: var(--color-nocturnal);
+  letter-spacing: 0.06em;
+  color: var(--color-forsythia);
   text-transform: uppercase;
 }
 
@@ -141,9 +144,9 @@
 .features {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
   margin-top: 8px;
-  padding-top: 20px;
+  padding-top: 24px;
   border-top: 1px solid var(--border-light);
 }
 
@@ -159,7 +162,16 @@
 
 .check {
   flex-shrink: 0;
-  margin-top: 1px;
-  color: var(--color-nocturnal);
   display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  margin-top: 1px;
+  border-radius: 50%;
+  background: var(--color-oceanic-noir);
+  color: var(--color-forsythia);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
 }

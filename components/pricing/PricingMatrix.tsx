@@ -10,7 +10,6 @@ import {
 } from '@/lib/pricingMatrix';
 import { CurrencySwitcher } from './CurrencySwitcher';
 import { BillingToggle } from './BillingToggle';
-import { CheckIcon } from '@/components/shared/IconsRef';
 import styles from './PricingMatrix.module.css';
 
 interface TierRefs {
@@ -20,8 +19,8 @@ interface TierRefs {
 }
 
 export function PricingMatrix() {
-  // STATE IS ENCAPSULATED ENTIRELY IN THIS COMPONENT
-  // PricingSection knows nothing of currency/cycle
+  // State is encapsulated entirely in this component.
+  // PricingSection knows nothing of currency/cycle.
   const [currency, setCurrency] = useState<Currency>('USD');
   const [cycle, setCycle] = useState<Cycle>('monthly');
 
@@ -31,7 +30,7 @@ export function PricingMatrix() {
     enterprise: { price: null, period: null, savings: null },
   });
 
-  // Update ONLY refs — no setState on parent, no context, no global re-render
+  // Update ONLY refs — no setState on parent, no context, no global re-render.
   const updateAllPrices = useCallback(() => {
     TIER_ORDER.forEach((tier) => {
       const result = pricingMatrix.compute(tier, currency, cycle);
@@ -70,7 +69,7 @@ export function PricingMatrix() {
               className={`${styles.tier} ${tier.highlighted ? styles.featured : ''}`}
             >
               {tier.highlighted && (
-                <span className={`${styles.badge} font-display`} aria-label="Most popular plan">
+                <span className={`${styles.badge} font-display`}>
                   Most popular
                 </span>
               )}
@@ -109,7 +108,7 @@ export function PricingMatrix() {
 
               <a
                 href="#"
-                className={`btn ${tier.highlighted ? 'btn-primary' : 'btn-light-ghost'} ${styles.tierCta}`}
+                className={`btn ${tier.highlighted ? 'btn-primary' : 'btn-light'} ${styles.tierCta}`}
               >
                 {tier.cta}
               </a>
@@ -117,9 +116,7 @@ export function PricingMatrix() {
               <ul className={styles.features}>
                 {tier.features.map((feature) => (
                   <li key={feature} className={styles.featureItem}>
-                    <span className={styles.check}>
-                      <CheckIcon size={18} aria-label="Included" />
-                    </span>
+                    <span className={styles.check} aria-hidden="true">✓</span>
                     <span>{feature}</span>
                   </li>
                 ))}

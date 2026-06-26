@@ -5,15 +5,17 @@
 }
 
 .item {
-  background: var(--color-nocturnal);
+  background: var(--color-oceanic-noir);
   border: 1px solid var(--border-dark);
   border-radius: var(--radius-md);
   overflow: hidden;
-  transition: border-color var(--timing-micro) var(--ease-out),
-    box-shadow var(--timing-micro) var(--ease-out);
+  transition: border-color var(--timing-micro) var(--ease-out);
 }
 
-.item:hover { border-color: var(--color-forsythia); }
+.item:hover,
+.itemOpen {
+  border-color: var(--color-forsythia);
+}
 
 .heading { margin: 0; }
 
@@ -23,33 +25,42 @@
   justify-content: space-between;
   gap: 16px;
   width: 100%;
-  padding: 16px;
+  padding: 18px 20px;
   text-align: left;
   font-family: inherit;
   color: var(--text-on-dark);
 }
 
-.trigger:hover { background: rgba(255, 200, 1, 0.05); }
+.trigger:hover {
+  background: rgba(255, 200, 1, 0.04);
+}
 
 .triggerInner {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
 }
 
 .iconWrap {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 38px;
+  height: 38px;
   border-radius: 8px;
-  background: rgba(255, 200, 1, 0.10);
-  border: 1px solid rgba(255, 200, 1, 0.2);
+  background: var(--color-nocturnal);
+  color: var(--color-forsythia);
   flex-shrink: 0;
+  transition: background var(--timing-micro) var(--ease-out),
+    color var(--timing-micro) var(--ease-out);
 }
 
-.icon { color: var(--color-forsythia); }
+.itemOpen .iconWrap {
+  background: var(--color-forsythia);
+  color: var(--color-oceanic-noir);
+}
+
+.icon { color: currentColor; }
 
 .triggerText {
   display: flex;
@@ -88,12 +99,12 @@
 }
 
 .content {
-  padding: 0 16px 16px 68px;
+  padding: 0 20px 20px 72px;
 }
 
 .content p {
   font-size: 13px;
-  line-height: 1.6;
+  line-height: 1.65;
   color: var(--text-muted-dark);
   font-family: var(--font-body);
   margin: 0;
