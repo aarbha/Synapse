@@ -13,10 +13,14 @@ export function BackgroundVideo() {
   const targetTimeRef = useRef<number>(0);
   const isSeekingRef = useRef<boolean>(false);
   const readyRef = useRef<boolean>(false);
+  const metadataLoadedRef = useRef<boolean>(false);
 
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
+
+    video.pause();
+    video.currentTime = 0;
 
     let rafId: number;
 
@@ -25,12 +29,13 @@ export function BackgroundVideo() {
         readyRef.current = true;
         smoothXRef.current = e.clientX;
         prevSmoothXRef.current = e.clientX;
+        targetTimeRef.current = video.currentTime || 0;
       }
       rawXRef.current = e.clientX;
     };
 
     const tick = () => {
-      if (readyRef.current) {
+      if (readyRef.current && metadataLoadedRef.current) {
         smoothXRef.current += (rawXRef.current - smoothXRef.current) * LERP_FACTOR;
         const delta = smoothXRef.current - prevSmoothXRef.current;
         prevSmoothXRef.current = smoothXRef.current;
@@ -42,7 +47,7 @@ export function BackgroundVideo() {
             Math.min(video.duration, targetTimeRef.current + timeOffset),
           );
 
-          if (!isSeekingRef.current) {
+          if (!isSeekingRef.current && !video.seeking) {
             isSeekingRef.current = true;
             video.currentTime = targetTimeRef.current;
           }
@@ -59,6 +64,18 @@ export function BackgroundVideo() {
       }
     };
 
+    const onLoadedMetadata = () => {
+      metadataLoadedRef.current = true;
+      targetTimeRef.current = 0;
+      video.currentTime = 0;
+      video.pause();
+    };
+
+    if (video.readyState >= 1) {
+      onLoadedMetadata();
+    } else {
+      video.addEventListener('loadedmetadata', onLoadedMetadata);
+    }
     window.addEventListener('mousemove', onMouseMove);
     video.addEventListener('seeked', onSeeked);
     rafId = requestAnimationFrame(tick);
@@ -66,6 +83,7 @@ export function BackgroundVideo() {
     return () => {
       window.removeEventListener('mousemove', onMouseMove);
       video.removeEventListener('seeked', onSeeked);
+      video.removeEventListener('loadedmetadata', onLoadedMetadata);
       cancelAnimationFrame(rafId);
     };
   }, []);
@@ -78,8 +96,6 @@ export function BackgroundVideo() {
       <video
         ref={videoRef}
         src={VIDEO_SRC}
-        autoPlay
-        loop
         muted
         playsInline
         preload="auto"
