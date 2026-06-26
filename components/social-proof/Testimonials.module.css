@@ -1,3 +1,5 @@
+/* Testimonials — section header + marquee + 3 cards with gradient border hover ring */
+
 .wrap {
   display: flex;
   flex-direction: column;
@@ -8,29 +10,42 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 18px;
   text-align: center;
 }
 
-.eyebrow {
+.eyebrowRow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.eyebrowRule {
+  width: 32px;
+  height: 1px;
+  background: var(--border-dark);
   display: inline-block;
-  padding: 5px 14px;
-  border-radius: 999px;
-  background: var(--color-oceanic-noir);
-  border: 1px solid var(--border-dark);
+}
+
+.eyebrow {
   font-size: 11px;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: var(--color-forsythia);
-  font-weight: 600;
+  color: var(--text-muted-dark);
+  font-weight: 500;
 }
 
 .title {
-  font-size: clamp(32px, 5vw, 48px);
+  font-size: clamp(32px, 5vw, 56px);
   font-weight: 700;
   letter-spacing: -0.03em;
-  line-height: 1.08;
+  line-height: 1.05;
   color: var(--text-on-dark);
+}
+
+.titleItalic {
+  font-style: italic;
+  font-weight: 500;
 }
 
 .logo {
@@ -61,6 +76,28 @@
   }
 }
 
+.cardWrap {
+  position: relative;
+  isolation: isolate;
+  border-radius: var(--radius-lg);
+}
+
+.cardWrap::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  z-index: -1;
+  border-radius: calc(var(--radius-lg) + 2px);
+  background: linear-gradient(135deg, var(--color-forsythia), var(--color-deep-saffron));
+  opacity: 0;
+  transition: opacity var(--timing-micro) var(--ease-out);
+  pointer-events: none;
+}
+
+.cardWrap:hover::before {
+  opacity: 1;
+}
+
 .card {
   display: flex;
   flex-direction: column;
@@ -69,21 +106,24 @@
   position: relative;
   background: var(--color-oceanic-noir);
   border: 1px solid var(--border-dark);
-  transition: border-color var(--timing-micro) var(--ease-out);
+  border-radius: var(--radius-lg);
+  transition: border-color var(--timing-micro) var(--ease-out),
+    transform var(--timing-micro) var(--ease-out);
 }
 
-.card:hover {
-  border-color: var(--color-forsythia);
+.cardWrap:hover .card {
+  transform: translateY(-3px);
 }
 
 .quoteMark {
   display: block;
   font-family: var(--font-display);
-  font-size: 72px;
+  font-size: 80px;
   line-height: 0.6;
   color: var(--color-forsythia);
-  margin-bottom: 8px;
+  margin-bottom: 12px;
   font-weight: 700;
+  font-style: italic;
 }
 
 .quote {

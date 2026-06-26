@@ -1,3 +1,5 @@
+/* PricingMatrix — cards with hover gradient border ring */
+
 .matrix {
   display: flex;
   flex-direction: column;
@@ -33,6 +35,7 @@
   }
 }
 
+/* Card with gradient border ring on hover (portfolio pattern) */
 .tier {
   position: relative;
   display: flex;
@@ -43,18 +46,41 @@
   border: 1px solid var(--border-light);
   border-radius: var(--radius-lg);
   color: var(--text-on-light);
-  transition: border-color var(--timing-micro) var(--ease-out),
-    box-shadow var(--timing-micro) var(--ease-out),
-    transform var(--timing-micro) var(--ease-out);
+  transition: transform var(--timing-micro) var(--ease-out),
+    box-shadow var(--timing-micro) var(--ease-out);
+  isolation: isolate;
+}
+
+.tier::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  z-index: -1;
+  border-radius: calc(var(--radius-lg) + 2px);
+  background: linear-gradient(135deg, var(--color-forsythia), var(--color-deep-saffron));
+  opacity: 0;
+  transition: opacity var(--timing-micro) var(--ease-out);
+  pointer-events: none;
+}
+
+.tier:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 32px -16px rgba(23, 43, 54, 0.25);
+}
+
+.tier:hover::before {
+  opacity: 1;
 }
 
 @media (min-width: 768px) {
   .featured {
-    border-color: var(--color-forsythia);
-    border-width: 2px;
     background: var(--color-arctic-powder);
     box-shadow: 0 24px 48px -24px rgba(255, 200, 1, 0.45);
     transform: translateY(-8px);
+    border-color: var(--color-forsythia);
+  }
+  .featured:hover {
+    transform: translateY(-12px);
   }
 }
 

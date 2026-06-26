@@ -5,11 +5,16 @@ export function PricingSection() {
   return (
     <div className={`shell section section-light ${styles.wrap}`}>
       <header className={styles.header}>
-        <span className={`${styles.eyebrow} font-display`}>Pricing</span>
+        <div className={styles.eyebrowRow}>
+          <span className={styles.eyebrowRule} aria-hidden="true" />
+          <span className={`${styles.eyebrow} font-display`}>Pricing</span>
+        </div>
         <h2 className={styles.title}>
           Simple, transparent pricing.
           <br />
-          <span className="accent-text">Change currency or billing anytime.</span>
+          <span className={`${styles.titleItalic} font-display accent-text`}>
+            Change currency or billing anytime.
+          </span>
         </h2>
         <p className={styles.lead}>
           Every price is computed live from our pricing matrix — no hardcoded numbers.

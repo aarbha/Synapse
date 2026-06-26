@@ -19,9 +19,12 @@ export function Testimonials() {
   return (
     <div className={`shell section section-dark ${styles.wrap}`}>
       <header className={styles.header}>
-        <span className={`${styles.eyebrow} font-display`}>Social proof</span>
+        <div className={styles.eyebrowRow}>
+          <span className={styles.eyebrowRule} aria-hidden="true" />
+          <span className={`${styles.eyebrow} font-display`}>Social Proof</span>
+        </div>
         <h2 className={styles.title}>
-          Trusted by teams <span className="accent-text">shipping fast.</span>
+          Trusted by teams <span className={`${styles.titleItalic} font-display accent-text`}>shipping fast.</span>
         </h2>
       </header>
 
@@ -37,8 +40,8 @@ export function Testimonials() {
 
       <ul className={styles.cards} aria-label="Customer testimonials">
         {TESTIMONIALS.map((t) => (
-          <li key={t.id}>
-            <article className={`card ${styles.card}`}>
+          <li key={t.id} className={styles.cardWrap}>
+            <article className={`${styles.card} interactive`}>
               <span className={styles.quoteMark} aria-hidden="true">“</span>
               <figure className={styles.quote}>
                 <Stars />

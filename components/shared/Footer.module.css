@@ -1,10 +1,141 @@
+/* Footer — marquee banner + email CTA + brand/columns/trust/status dot */
+
 .wrap {
-  padding-block: 80px 32px;
+  position: relative;
   background: var(--bg-primary);
   border-top: 1px solid var(--border-dark);
   margin-top: 96px;
+  padding-bottom: 0;
 }
 
+/* Big marquee banner (portfolio pattern) */
+.marqueeBar {
+  padding-block: 48px 64px;
+  border-bottom: 1px solid var(--border-dark);
+  overflow: hidden;
+}
+
+.marqueeTrack {
+  gap: 32px;
+}
+
+.marqueeItem {
+  font-size: clamp(64px, 14vw, 160px);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--color-oceanic-noir);
+  -webkit-text-stroke: 1.5px var(--text-muted-dark);
+  text-stroke: 1.5px var(--text-muted-dark);
+  white-space: nowrap;
+  user-select: none;
+}
+
+.inner {
+  padding-top: 64px;
+  padding-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+}
+
+/* CTA block above footer columns */
+.ctaBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  text-align: center;
+  padding-block: 32px;
+  border-bottom: 1px solid var(--border-dark);
+  padding-bottom: 64px;
+}
+
+.eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--text-muted-dark);
+  font-weight: 500;
+}
+
+.ctaHeading {
+  font-size: clamp(36px, 6vw, 64px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  color: var(--text-on-dark);
+}
+
+.ctaHeadingItalic {
+  font-style: italic;
+  font-weight: 500;
+  color: var(--color-forsythia);
+}
+
+.ctaButton {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 0;
+  text-decoration: none;
+  color: var(--text-on-dark);
+  margin-top: 12px;
+  transition: transform var(--timing-micro) var(--ease-out);
+}
+
+.ctaButton:hover {
+  transform: translateY(-2px);
+}
+
+.ctaRing {
+  position: absolute;
+  inset: -2px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--color-forsythia), var(--color-deep-saffron));
+  opacity: 0;
+  transition: opacity var(--timing-micro) var(--ease-out);
+  pointer-events: none;
+}
+
+.ctaButton:hover .ctaRing,
+.ctaButton:focus-visible .ctaRing {
+  opacity: 1;
+}
+
+.ctaInner {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 28px;
+  background: var(--color-nocturnal);
+  border: 1px solid var(--border-dark);
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  transition: background var(--timing-micro) var(--ease-out);
+}
+
+.ctaButton:hover .ctaInner {
+  background: var(--color-oceanic-noir);
+}
+
+.ctaArrow {
+  font-family: var(--font-body);
+  font-size: 16px;
+  display: inline-block;
+  transition: transform var(--timing-micro) var(--ease-out);
+}
+
+.ctaButton:hover .ctaArrow {
+  transform: translate(3px, -3px);
+}
+
+/* Top: brand + columns */
 .top {
   display: grid;
   grid-template-columns: 1fr;
@@ -45,6 +176,7 @@
   color: var(--text-muted-dark);
   line-height: 1.65;
   max-width: 300px;
+  font-family: var(--font-body);
 }
 
 .socials {
@@ -65,6 +197,7 @@
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.04em;
+  text-decoration: none;
 }
 
 .social:hover {
@@ -91,12 +224,16 @@
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--color-forsythia);
+  margin: 0;
 }
 
 .column ul {
   display: flex;
   flex-direction: column;
   gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 .colLink {
@@ -105,19 +242,21 @@
   font-size: 14px;
   color: var(--text-muted-dark);
   font-family: var(--font-body);
+  text-decoration: none;
 }
 
 .colLink:hover {
   color: var(--color-forsythia);
 }
 
+/* Trust marquee */
 .trustBar {
   display: flex;
   flex-direction: column;
   gap: 20px;
   padding-block: 40px;
   border-top: 1px solid var(--border-dark);
-  margin-top: 64px;
+  border-bottom: 1px solid var(--border-dark);
 }
 
 .trustLabel {
@@ -143,18 +282,53 @@
   opacity: 1;
 }
 
+/* Bottom bar with status dot */
 .bottom {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 12px;
   padding-top: 32px;
-  border-top: 1px solid var(--border-dark);
+  align-items: center;
+  text-align: center;
 }
 
 .copy, .made {
   font-size: 12px;
   color: var(--text-muted-dark);
   font-family: var(--font-body);
+  margin: 0;
+}
+
+.statusRow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  color: var(--text-muted-dark);
+  font-family: var(--font-body);
+  margin: 0;
+}
+
+.statusDot {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--color-forsythia);
+  box-shadow: 0 0 0 4px rgba(255, 200, 1, 0.2);
+  flex-shrink: 0;
+}
+
+.statusPulse {
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 2px solid var(--color-forsythia);
+  opacity: 0.6;
+  animation: pulse-dot 2.2s ease-in-out infinite;
 }
 
 @media (min-width: 768px) {
@@ -169,5 +343,6 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    text-align: left;
   }
 }

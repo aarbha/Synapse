@@ -11,7 +11,7 @@ export function NavBar() {
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
+    const onScroll = () => setScrolled(window.scrollY > 100);
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
@@ -33,53 +33,71 @@ export function NavBar() {
   const closeMenu = useCallback(() => setOpen(false), []);
 
   return (
-    <nav aria-label="Primary" className={`${styles.nav} ${scrolled ? styles.scrolled : ''} interactive`}>
-      <div className={`shell ${styles.inner}`}>
-        <a href="#hero" className={styles.brand} onClick={closeMenu}>
-          <span className={styles.logoWrap} aria-hidden="true">
-            <PkgIcon src="/svgs/cube-16-solid.svg" size={18} alt="Synapse logo" />
-          </span>
-          <span className={`${styles.brandName} font-display`}>Synapse</span>
-        </a>
-
-        <ul className={styles.links}>
-          {NAV_LINKS.map((link) => (
-            <li key={link.href}>
-              <a href={link.href} className={`${styles.link} font-display interactive`}>
-                {link.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-
-        <div className={styles.actions}>
-          <a href="#pricing" className={`${styles.signIn} font-display interactive`}>
-            Sign in
-          </a>
-          <a href="#pricing" className="btn btn-primary">
-            Get started
-          </a>
-        </div>
-
-        <button
-          ref={buttonRef}
-          type="button"
-          className={styles.menuBtn}
-          aria-expanded={open}
-          aria-controls="mobile-menu"
-          aria-label={open ? 'Close menu' : 'Open menu'}
-          onClick={toggleMenu}
-        >
-          {open ? (
-            <PkgIcon src="/svgs/x-mark.svg" size={20} alt="" />
-          ) : (
-            <span className={styles.hamburger} aria-hidden="true">
-              <span />
-              <span />
-              <span />
+    <nav
+      aria-label="Primary"
+      className={`${styles.nav} ${scrolled ? styles.scrolled : ''} ${open ? styles.menuOpen : ''}`}
+    >
+      <div className={styles.pillWrap}>
+        <div className={`${styles.pill} ${scrolled ? styles.pillScrolled : ''}`}>
+          <a href="#hero" className={styles.brand} onClick={closeMenu} aria-label="Synapse home">
+            <span className={styles.logoRing} aria-hidden="true">
+              <span className={styles.logoInner}>
+                <PkgIcon src="/svgs/cube-16-solid.svg" size={14} alt="" />
+              </span>
             </span>
-          )}
-        </button>
+            <span className={`${styles.brandName} font-display`}>Synapse</span>
+          </a>
+
+          <span className={styles.divider} aria-hidden="true" />
+
+          <ul className={styles.links}>
+            {NAV_LINKS.map((link) => (
+              <li key={link.href}>
+                <a
+                  href={link.href}
+                  className={`${styles.link} font-display interactive`}
+                  onClick={closeMenu}
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+
+          <span className={styles.divider} aria-hidden="true" />
+
+          <a
+            href="#pricing"
+            className={`${styles.cta} font-display interactive`}
+            onClick={closeMenu}
+          >
+            <span className={styles.ctaRing} aria-hidden="true" />
+            <span className={styles.ctaInner}>
+              <span>Get started</span>
+              <span className={styles.ctaArrow} aria-hidden="true">↗</span>
+            </span>
+          </a>
+
+          <button
+            ref={buttonRef}
+            type="button"
+            className={styles.menuBtn}
+            aria-expanded={open}
+            aria-controls="mobile-menu"
+            aria-label={open ? 'Close menu' : 'Open menu'}
+            onClick={toggleMenu}
+          >
+            {open ? (
+              <PkgIcon src="/svgs/x-mark.svg" size={18} alt="" />
+            ) : (
+              <span className={styles.hamburger} aria-hidden="true">
+                <span />
+                <span />
+                <span />
+              </span>
+            )}
+          </button>
+        </div>
       </div>
 
       <div
@@ -90,16 +108,15 @@ export function NavBar() {
         <ul className={styles.mobileLinks}>
           {NAV_LINKS.map((link) => (
             <li key={link.href}>
-              <a href={link.href} className={`${styles.mobileLink} font-display`} onClick={closeMenu}>
+              <a
+                href={link.href}
+                className={`${styles.mobileLink} font-display`}
+                onClick={closeMenu}
+              >
                 {link.label}
               </a>
             </li>
           ))}
-          <li>
-            <a href="#pricing" className="btn btn-ghost" onClick={closeMenu}>
-              Sign in
-            </a>
-          </li>
           <li>
             <a href="#pricing" className="btn btn-primary" onClick={closeMenu}>
               Get started

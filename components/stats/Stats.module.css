@@ -1,0 +1,66 @@
+/* Stats — 3-column big-number grid with labels */
+
+.wrap {
+  padding-block: 64px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  border-top: 1px solid var(--border-dark);
+  border-bottom: 1px solid var(--border-dark);
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+  padding: 32px 16px;
+  position: relative;
+}
+
+.item + .item::before {
+  content: '';
+  position: absolute;
+  top: 25%;
+  left: 0;
+  width: 1px;
+  height: 50%;
+  background: var(--border-dark);
+}
+
+.value {
+  font-size: clamp(48px, 7vw, 72px);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--color-forsythia);
+}
+
+.label {
+  font-size: 12px;
+  font-family: var(--font-body);
+  color: var(--text-muted-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 500;
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .item + .item::before { display: none; }
+  .item { padding: 48px 24px; }
+  .item + .item {
+    border-left: 1px solid var(--border-dark);
+  }
+}
+
+@media (min-width: 1024px) {
+  .value { font-size: 80px; }
+  .item { padding: 64px 32px; }
+}

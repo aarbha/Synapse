@@ -12,11 +12,16 @@ export function FeatureSection() {
   return (
     <div className={`shell section section-secondary ${styles.wrap}`}>
       <header className={styles.header}>
-        <span className={`${styles.eyebrow} font-display`}>Capabilities</span>
+        <div className={styles.eyebrowRow}>
+          <span className={styles.eyebrowRule} aria-hidden="true" />
+          <span className={`${styles.eyebrow} font-display`}>Selected Capabilities</span>
+        </div>
         <h2 className={styles.title}>
           Everything you need to ship
           <br />
-          <span className="accent-text">production-grade automation.</span>
+          <span className={`${styles.titleItalic} font-display accent-text`}>
+            production-grade automation.
+          </span>
         </h2>
         <p className={styles.lead}>
           From autonomous agents to enterprise compliance — Synapse is the connective

@@ -1,111 +1,195 @@
+/* NavBar — floating pill at top-center, logo ring + links + CTA with gradient hover border */
+
 .nav {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 50;
-  border-bottom: 1px solid transparent;
-  background: rgba(23, 43, 54, 0.6);
-  backdrop-filter: saturate(140%) blur(0px);
-  -webkit-backdrop-filter: saturate(140%) blur(0px);
+  pointer-events: none;
 }
 
-.scrolled {
-  border-bottom-color: var(--border-dark);
-  background: rgba(23, 43, 54, 0.88);
-  backdrop-filter: saturate(140%) blur(16px);
-  -webkit-backdrop-filter: saturate(140%) blur(16px);
-}
-
-.inner {
+.pillWrap {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 68px;
-  gap: 24px;
+  justify-content: center;
+  padding: 16px 16px 0;
+  pointer-events: none;
 }
 
+.pill {
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 6px 6px 8px;
+  border-radius: 999px;
+  background: rgba(17, 76, 90, 0.55);
+  border: 1px solid var(--border-dark);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 18px -8px rgba(0, 0, 0, 0.4);
+  transition: box-shadow var(--timing-micro) var(--ease-out),
+    background var(--timing-micro) var(--ease-out),
+    border-color var(--timing-micro) var(--ease-out);
+  max-width: calc(100vw - 32px);
+}
+
+.pillScrolled {
+  background: rgba(17, 76, 90, 0.75);
+  box-shadow: 0 8px 28px -10px rgba(0, 0, 0, 0.6);
+}
+
+/* Brand: logo ring (gradient border) + cube icon + wordmark */
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  color: var(--color-forsythia);
+  gap: 8px;
+  padding: 0 6px 0 4px;
+  color: var(--text-on-dark);
 }
 
-.logoWrap {
+.logoRing {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
-  border-radius: 8px;
-  background: var(--color-forsythia);
-  color: var(--color-oceanic-noir);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-forsythia), var(--color-deep-saffron));
   transition: transform var(--timing-micro) var(--ease-out);
+  flex-shrink: 0;
 }
 
-.brand:hover .logoWrap {
-  transform: rotate(-8deg);
+.brand:hover .logoRing {
+  transform: rotate(-90deg);
+}
+
+.logoInner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--bg-primary);
+  color: var(--color-forsythia);
 }
 
 .brandName {
-  font-size: 16px;
-  font-weight: 700;
-  letter-spacing: -0.01em;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
   color: var(--text-on-dark);
+}
+
+.divider {
+  display: none;
+  width: 1px;
+  height: 18px;
+  background: var(--border-dark);
+  flex-shrink: 0;
+  margin: 0 2px;
 }
 
 .links {
   display: none;
   align-items: center;
-  gap: 4px;
+  gap: 0;
 }
 
 .link {
   display: inline-block;
-  padding: 8px 12px;
-  border-radius: 8px;
+  padding: 6px 10px;
+  border-radius: 999px;
   font-size: 12px;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: var(--text-on-dark);
+  color: var(--text-muted-dark);
   font-weight: 500;
+  transition: color var(--timing-micro) var(--ease-out),
+    background var(--timing-micro) var(--ease-out);
+  white-space: nowrap;
 }
 
-.link:hover {
-  color: var(--color-forsythia);
-  background: rgba(255, 200, 1, 0.06);
+.link:hover,
+.link:focus-visible {
+  color: var(--text-on-dark);
+  background: rgba(241, 246, 244, 0.08);
 }
 
-.actions {
+/* "Get started" CTA with gradient border ring on hover */
+.cta {
+  position: relative;
   display: none;
   align-items: center;
-  gap: 12px;
-}
-
-.signIn {
+  border-radius: 999px;
   font-size: 12px;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--text-on-dark);
-  padding: 8px 4px;
-  font-weight: 500;
+  font-weight: 600;
+  padding: 0;
+  text-decoration: none;
 }
 
-.signIn:hover {
-  color: var(--color-forsythia);
+.ctaRing {
+  position: absolute;
+  inset: -2px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--color-forsythia), var(--color-deep-saffron));
+  opacity: 0;
+  transition: opacity var(--timing-micro) var(--ease-out);
+  pointer-events: none;
 }
 
+.cta:hover .ctaRing,
+.cta:focus-visible .ctaRing {
+  opacity: 1;
+}
+
+.ctaInner {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  background: var(--color-nocturnal);
+  border-radius: 999px;
+  border: 1px solid var(--border-dark);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: background var(--timing-micro) var(--ease-out);
+}
+
+.cta:hover .ctaInner {
+  background: var(--color-nocturnal);
+}
+
+.ctaArrow {
+  font-family: var(--font-body);
+  font-size: 12px;
+  display: inline-block;
+  transition: transform var(--timing-micro) var(--ease-out);
+}
+
+.cta:hover .ctaArrow {
+  transform: translate(2px, -2px);
+}
+
+/* Mobile menu button */
 .menuBtn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 8px;
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
   border: 1px solid var(--border-dark);
-  background: transparent;
+  background: rgba(23, 43, 54, 0.6);
   color: var(--text-on-dark);
+  margin-left: 4px;
+  flex-shrink: 0;
 }
 
 .menuBtn:hover {
@@ -117,43 +201,48 @@
   display: inline-flex;
   flex-direction: column;
   justify-content: center;
-  gap: 4px;
-  width: 18px;
-  height: 14px;
+  gap: 3px;
+  width: 16px;
+  height: 12px;
 }
 
 .hamburger span {
   display: block;
   width: 100%;
-  height: 2px;
+  height: 1.5px;
   background: currentColor;
   border-radius: 1px;
   transition: transform var(--timing-micro) var(--ease-out);
 }
 
 .mobileMenu {
+  pointer-events: auto;
+  margin: 8px 16px 0;
   overflow: hidden;
   max-height: 0;
-  border-bottom: 1px solid var(--border-dark);
-  background: rgba(23, 43, 54, 0.98);
+  border-radius: var(--radius-lg);
+  background: rgba(17, 76, 90, 0.95);
+  border: 1px solid var(--border-dark);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .mobileOpen {
-  max-height: 360px;
+  max-height: 480px;
 }
 
 .mobileLinks {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  padding: 16px var(--gutter) 24px;
+  padding: 12px;
 }
 
 .mobileLink {
   display: block;
-  padding: 12px 8px;
-  border-radius: 8px;
-  font-size: 14px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-size: 13px;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--text-on-dark);
@@ -166,8 +255,16 @@
 }
 
 @media (min-width: 768px) {
-  .links { display: flex; }
-  .actions { display: flex; }
+  .pillWrap { padding-top: 20px; }
+  .divider { display: inline-block; }
+  .links { display: inline-flex; }
+  .cta { display: inline-flex; }
   .menuBtn { display: none; }
   .mobileMenu { display: none; }
+}
+
+@media (min-width: 1024px) {
+  .pillWrap { padding-top: 24px; }
+  .link { padding: 7px 14px; font-size: 13px; }
+  .ctaInner { padding: 7px 16px; }
 }

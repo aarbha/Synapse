@@ -1,48 +1,67 @@
 import { NavBar } from '@/components/shared/NavBar';
 import { Footer } from '@/components/shared/Footer';
+import { PageClient } from './PageClient';
 import { Hero } from '@/components/hero/Hero';
 import { FeatureSection } from '@/components/features/FeatureSection';
+import { Journal } from '@/components/journal/Journal';
+import { Stats } from '@/components/stats/Stats';
 import { PricingSection } from '@/components/pricing/PricingSection';
 import { Testimonials } from '@/components/social-proof/Testimonials';
 
 export default function Home() {
   return (
-    <main>
-      <header role="banner">
-        <NavBar />
-      </header>
+    <PageClient>
+      <main>
+        <header role="banner">
+          <NavBar />
+        </header>
 
-      <section id="hero" aria-label="Synapse — AI Automation Platform">
-        <Hero />
-      </section>
+        <section id="hero" aria-label="Synapse — AI Automation Platform">
+          <Hero />
+        </section>
 
-      <section
-        id="features"
-        aria-label="Platform features and capabilities"
-        className="reveal"
-      >
-        <FeatureSection />
-      </section>
+        <section
+          id="features"
+          aria-label="Platform features and capabilities"
+          className="reveal"
+        >
+          <FeatureSection />
+        </section>
 
-      <section
-        id="pricing"
-        aria-label="Pricing plans and billing"
-        className="reveal"
-      >
-        <PricingSection />
-      </section>
+        <section
+          id="journal"
+          aria-label="Field notes and capability deep-dives"
+          className="reveal"
+        >
+          <Journal />
+        </section>
 
-      <section
-        id="testimonials"
-        aria-label="Customer testimonials and social proof"
-        className="reveal"
-      >
-        <Testimonials />
-      </section>
+        <section
+          id="stats"
+          aria-label="Synapse platform statistics"
+          className="reveal"
+        >
+          <Stats />
+        </section>
 
-      <footer role="contentinfo">
-        <Footer />
-      </footer>
-    </main>
+        <section
+          id="pricing"
+          aria-label="Pricing plans and billing"
+          className="reveal"
+        >
+          <PricingSection />
+        </section>
+
+        <section
+          id="testimonials"
+          aria-label="Customer testimonials and social proof"
+          className="reveal"
+        >
+          <Testimonials />
+        </section>
+      </main>
+
+      <Footer />
+    </PageClient>
   );
 }

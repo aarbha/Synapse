@@ -1,7 +1,9 @@
+/* BentoGrid — portfolio-style cards: bg pattern, hover overlay with label pill */
+
 .grid {
   grid-template-columns: repeat(12, 1fr);
-  grid-auto-rows: minmax(200px, auto);
-  gap: 16px;
+  grid-auto-rows: minmax(220px, auto);
+  gap: 18px;
 }
 
 .card {
@@ -9,7 +11,7 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-  padding: 32px;
+  padding: 28px;
   background: var(--color-nocturnal);
   border: 1px solid var(--border-dark);
   border-radius: var(--radius-lg);
@@ -17,51 +19,71 @@
   outline: none;
   overflow: hidden;
   color: var(--text-on-dark);
-}
-
-.card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(255, 200, 1, 0.0) 50%,
-    transparent 100%
-  );
-  transition: background var(--timing-micro) var(--ease-out);
-}
-
-.card:hover::before,
-.card:focus-visible::before {
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(255, 200, 1, 0.5) 50%,
-    transparent 100%
-  );
+  isolation: isolate;
+  transition: border-color var(--timing-micro) var(--ease-out),
+    transform var(--timing-micro) var(--ease-out);
 }
 
 .card:hover,
 .card:focus-visible {
   border-color: var(--color-forsythia);
-  transform: translateY(-2px);
+}
+
+.card:hover {
+  transform: translateY(-3px);
 }
 
 .active {
   border-color: var(--color-forsythia);
 }
 
-.active::before {
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    var(--color-forsythia) 50%,
-    transparent 100%
-  );
+/* Soft gradient orbs visible at low opacity (no images needed) */
+.bgPattern {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.bgOrb1,
+.bgOrb2 {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.35;
+  will-change: transform;
+}
+
+.bgOrb1 {
+  width: 220px;
+  height: 220px;
+  bottom: -40%;
+  right: -20%;
+  background: radial-gradient(circle, var(--color-forsythia) 0%, transparent 70%);
+}
+
+.bgOrb2 {
+  width: 180px;
+  height: 180px;
+  top: -30%;
+  left: -10%;
+  background: radial-gradient(circle, var(--color-nocturnal) 0%, transparent 70%);
+  opacity: 0.6;
+}
+
+.card:hover .bgOrb1 {
+  opacity: 0.55;
+  transform: scale(1.1);
+}
+
+.body {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  flex: 1;
 }
 
 .iconWrap {
@@ -84,22 +106,14 @@
   color: var(--color-oceanic-noir);
 }
 
-.icon {
-  color: currentColor;
-}
-
-.body {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
+.icon { color: currentColor; }
 
 .title {
-  font-size: 19px;
+  font-size: 20px;
   font-weight: 700;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
   color: var(--text-on-dark);
-  line-height: 1.25;
+  line-height: 1.2;
 }
 
 .short {
@@ -107,9 +121,88 @@
   color: var(--text-muted-dark);
   line-height: 1.55;
   font-family: var(--font-body);
+  margin: 0;
 }
 
+/* Hover overlay — covers card, blurs background, displays label pill */
+.hoverOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: rgba(23, 43, 54, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--timing-micro) var(--ease-out);
+}
+
+.card:hover .hoverOverlay,
+.card:focus-visible .hoverOverlay {
+  opacity: 1;
+}
+
+.hoverLabel {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(8px);
+  pointer-events: none;
+  transition: opacity var(--timing-micro) var(--ease-out),
+    transform var(--timing-micro) var(--ease-out);
+}
+
+.card:hover .hoverLabel,
+.card:focus-visible .hoverLabel {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hoverLabelRing {
+  position: absolute;
+  inset: -2px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--color-forsythia), var(--color-deep-saffron));
+  background-size: 200% 200%;
+  animation: gradient-shift 6s ease infinite;
+}
+
+.hoverLabelInner {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: var(--color-arctic-powder);
+  color: var(--color-oceanic-noir);
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  font-family: var(--font-display);
+  white-space: nowrap;
+}
+
+.hoverLabelDash {
+  color: var(--color-deep-saffron);
+  font-weight: 700;
+}
+
+.hoverLabelName {
+  font-style: italic;
+  font-weight: 500;
+  text-transform: none;
+}
+
+/* Long description (shown on focus/active) */
 .long {
+  position: relative;
+  z-index: 1;
   max-height: 0;
   opacity: 0;
   margin: 0;
@@ -126,12 +219,12 @@
 }
 
 .longOpen {
-  max-height: 220px;
+  max-height: 240px;
   opacity: 1;
   padding-top: 16px;
 }
 
-/* Asymmetric bento: 2 large, 4 small, distinct rhythm */
+/* Asymmetric bento: 7/5 column split, lg takes 2 rows */
 .span-lg { grid-column: span 12; grid-row: span 2; }
 .span-md { grid-column: span 12; grid-row: span 1; }
 .span-sm { grid-column: span 12; grid-row: span 1; }
@@ -143,7 +236,6 @@
 }
 
 @media (min-width: 1024px) {
-  .grid {
-    gap: 20px;
-  }
+  .grid { gap: 22px; }
+  .card { padding: 32px; }
 }
