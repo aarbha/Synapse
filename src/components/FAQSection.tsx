@@ -3,12 +3,42 @@ import { Plus, Minus } from 'lucide-react';
 import { Reveal } from './Reveal';
 
 const processes = [
-  { title: "Consultation",                 duration: "Day 1",      desc: "During the initial consultation, we will discuss your business goals and objectives, target audience, and current marketing efforts. This will allow us to understand your needs and tailor our services to best fit your requirements." },
-  { title: "Research and Strategy Development", duration: "Week 1", desc: "During the initial consultation, we will discuss your business goals and objectives, target audience, and current marketing efforts. This will allow us to understand your needs and tailor our services to best fit your requirements." },
-  { title: "Implementation",              duration: "Weeks 2-3",  desc: "During the initial consultation, we will discuss your business goals and objectives, target audience, and current marketing efforts. This will allow us to understand your needs and tailor our services to best fit your requirements." },
-  { title: "Monitoring and Optimization", duration: "Ongoing",    desc: "During the initial consultation, we will discuss your business goals and objectives, target audience, and current marketing efforts. This will allow us to understand your needs and tailor our services to best fit your requirements." },
-  { title: "Reporting and Communication", duration: "Weekly",     desc: "During the initial consultation, we will discuss your business goals and objectives, target audience, and current marketing efforts. This will allow us to understand your needs and tailor our services to best fit your requirements." },
-  { title: "Continual Improvement",       duration: "Monthly",    desc: "During the initial consultation, we will discuss your business goals and objectives, target audience, and current marketing efforts. This will allow us to understand your needs and tailor our services to best fit your requirements." }
+  {
+    title: "Consultation",
+    duration: "Day 1",
+    metric: "60-min call · 0 cost",
+    desc: "A Synapse solutions architect joins your team for a 60-minute working session. We map your top three workflows, audit the existing automation stack, identify the highest-ROI agent candidates, and define success metrics before any code is written."
+  },
+  {
+    title: "Research and Strategy Development",
+    duration: "Week 1",
+    metric: "14 benchmarks · 1 blueprint",
+    desc: "We benchmark your data, prompts, and tool surface against 14 enterprise reference models. The deliverable is a one-page agent blueprint: scope, guardrails, data flow diagrams, estimated token cost per task, and a projected ROI of 3–6× within the first quarter."
+  },
+  {
+    title: "Implementation",
+    duration: "Weeks 2-3",
+    metric: "23 tools · 8 workflows · 14 days",
+    desc: "Synapse engineers ship the first production-ready agents in 14 days. The average engagement integrates 23 tools, automates 8 end-to-end workflows, and clears 99.4% of our 1,200-test regression suite before staging. Zero-downtime rollout to your tenant on day 14."
+  },
+  {
+    title: "Monitoring and Optimization",
+    duration: "Ongoing",
+    metric: "1.2 s latency · 99.9 % uptime",
+    desc: "Every agent run is logged with latency, token cost, success rate, and user feedback. Median response time is 1.2 s, p95 is under 4 s, and the platform auto-retries failures up to three times. Anomalies trigger a Slack alert within 60 seconds."
+  },
+  {
+    title: "Reporting and Communication",
+    duration: "Weekly",
+    metric: "12.4k runs · 98.7 % resolved",
+    desc: "Every Monday at 09:00 local time, your team receives a rollup: total conversations handled, resolution rate, cost per task, top failure modes, and trend deltas versus the prior week. Delivered to Slack, email, and the live Synapse dashboard."
+  },
+  {
+    title: "Continual Improvement",
+    duration: "Monthly",
+    metric: "30 % gain · new skills shipped",
+    desc: "Each month we re-evaluate your agents against the latest Synapse model releases and ship new skills, prompts, and tool adapters. Customers see a 30% efficiency gain over the first six months, and every quarterly review introduces at least two new automated workflows."
+  }
 ];
 
 export function FAQSection() {
@@ -54,8 +84,10 @@ export function FAQSection() {
                       <span className="text-xl md:text-2xl font-medium group-hover:translate-x-2 transition-transform duration-300">
                         {process.title}
                       </span>
-                      <span className="font-mono text-[10px] tracking-widest uppercase opacity-60 mt-1">
-                        {process.duration}
+                      <span className="font-mono text-[10px] tracking-widest uppercase opacity-60 mt-1 flex flex-wrap items-center gap-x-3 gap-y-1">
+                        <span>{process.duration}</span>
+                        <span className="hidden md:inline opacity-50">·</span>
+                        <span>{process.metric}</span>
                       </span>
                     </span>
                   </div>
