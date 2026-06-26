@@ -1,0 +1,105 @@
+.grid {
+  grid-template-columns: repeat(12, 1fr);
+  grid-auto-rows: minmax(180px, auto);
+  gap: 16px;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 28px;
+  background: rgba(241, 246, 244, 0.04);
+  border: 1px solid var(--border-dark);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  outline: none;
+  overflow: hidden;
+  color: var(--text-on-dark);
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(120% 120% at 50% 0%, rgba(255, 200, 1, 0.10) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity var(--timing-micro) var(--ease-out);
+  pointer-events: none;
+}
+
+.card:hover,
+.card:focus-visible {
+  border-color: var(--color-forsythia);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px -12px rgba(255, 200, 1, 0.35);
+}
+
+.card:hover::before,
+.card:focus-visible::before { opacity: 1; }
+
+.active {
+  border-color: var(--color-forsythia);
+  box-shadow: 0 0 0 1px var(--color-forsythia), 0 12px 40px -12px rgba(255, 200, 1, 0.4);
+}
+
+.iconWrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  background: rgba(255, 200, 1, 0.10);
+  border: 1px solid rgba(255, 200, 1, 0.25);
+}
+
+.icon {
+  color: var(--color-forsythia);
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--text-on-dark);
+}
+
+.short {
+  font-size: 14px;
+  color: var(--text-muted-dark);
+  line-height: 1.55;
+  font-family: var(--font-body);
+}
+
+.long {
+  max-height: 0;
+  opacity: 0;
+  margin: 0;
+  font-size: 13px;
+  color: var(--text-muted-dark);
+  line-height: 1.6;
+  overflow: hidden;
+  font-family: var(--font-body);
+  transition: max-height var(--timing-layout) var(--ease-in-out),
+    opacity var(--timing-layout) var(--ease-in-out),
+    margin var(--timing-layout) var(--ease-in-out);
+}
+
+.longOpen {
+  max-height: 200px;
+  opacity: 1;
+  margin-top: 4px;
+}
+
+.span-lg { grid-column: span 8; grid-row: span 2; }
+.span-md { grid-column: span 8; grid-row: span 1; }
+.span-sm { grid-column: span 4; grid-row: span 1; }
+
+@media (min-width: 1024px) {
+  .grid { gap: 20px; grid-auto-rows: minmax(200px, auto); }
+  .span-lg { grid-column: span 7; }
+  .span-md { grid-column: span 5; }
+}
