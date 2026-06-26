@@ -26,9 +26,13 @@ export function TabsSection() {
           {/* Tabs header */}
           <div className="flex border-b border-[#114C5A] overflow-x-auto hide-scrollbar relative">
             {tabs.map((tab, i) => (
-              <button 
+              <button
+                type="button"
                 key={tab}
                 onClick={() => setActiveTab(i)}
+                aria-label={`${tab.charAt(0)}${tab.slice(1).toLowerCase()} — view this stage of the agent lifecycle`}
+                title={`View the ${tab.charAt(0)}${tab.slice(1).toLowerCase()} stage`}
+                aria-pressed={activeTab === i}
                 className={`flex-1 py-5 text-xs font-mono text-center tracking-widest transition-colors whitespace-nowrap px-8 relative
                   ${activeTab === i ? 'text-[#FFC801] bg-[#114C5A]/10' : 'text-[#D9E8E2]/50 hover:text-[#D9E8E2] hover:bg-white/[0.02] cursor-pointer'}`}
               >
@@ -123,12 +127,18 @@ export function TabsSection() {
                 Quantify every interaction for total quality.
               </p>
               <div>
-                <button 
+                <button
+                  type="button"
                   onClick={() => showToast('More Metrics Data')}
+                  aria-label="Open the full performance dashboard with historical trends"
+                  title="Open the full performance dashboard with historical trends"
                   className="border border-[#114C5A] text-[#F1F6F4] px-6 py-3 rounded-sm text-xs font-mono tracking-widest hover:bg-[#114C5A] hover:text-[#FFC801] transition-colors cursor-pointer"
                 >
                   MORE METRICS
                 </button>
+                <p className="font-mono text-[11px] text-[#D9E8E2]/55 tracking-wide mt-3 uppercase">
+                  90-day rolling window &middot; exportable CSV &middot; live updates
+                </p>
               </div>
             </div>
           </div>

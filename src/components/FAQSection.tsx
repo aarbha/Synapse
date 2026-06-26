@@ -3,12 +3,12 @@ import { Plus, Minus } from 'lucide-react';
 import { Reveal } from './Reveal';
 
 const processes = [
-  { title: "Consultation", desc: "During the initial consultation, we will discuss your business goals and objectives, target audience, and current marketing efforts. This will allow us to understand your needs and tailor our services to best fit your requirements." },
-  { title: "Research and Strategy Development", desc: "During the initial consultation, we will discuss your business goals and objectives, target audience, and current marketing efforts. This will allow us to understand your needs and tailor our services to best fit your requirements." },
-  { title: "Implementation", desc: "During the initial consultation, we will discuss your business goals and objectives, target audience, and current marketing efforts. This will allow us to understand your needs and tailor our services to best fit your requirements." },
-  { title: "Monitoring and Optimization", desc: "During the initial consultation, we will discuss your business goals and objectives, target audience, and current marketing efforts. This will allow us to understand your needs and tailor our services to best fit your requirements." },
-  { title: "Reporting and Communication", desc: "During the initial consultation, we will discuss your business goals and objectives, target audience, and current marketing efforts. This will allow us to understand your needs and tailor our services to best fit your requirements." },
-  { title: "Continual Improvement", desc: "During the initial consultation, we will discuss your business goals and objectives, target audience, and current marketing efforts. This will allow us to understand your needs and tailor our services to best fit your requirements." }
+  { title: "Consultation",                 duration: "Day 1",      desc: "During the initial consultation, we will discuss your business goals and objectives, target audience, and current marketing efforts. This will allow us to understand your needs and tailor our services to best fit your requirements." },
+  { title: "Research and Strategy Development", duration: "Week 1", desc: "During the initial consultation, we will discuss your business goals and objectives, target audience, and current marketing efforts. This will allow us to understand your needs and tailor our services to best fit your requirements." },
+  { title: "Implementation",              duration: "Weeks 2-3",  desc: "During the initial consultation, we will discuss your business goals and objectives, target audience, and current marketing efforts. This will allow us to understand your needs and tailor our services to best fit your requirements." },
+  { title: "Monitoring and Optimization", duration: "Ongoing",    desc: "During the initial consultation, we will discuss your business goals and objectives, target audience, and current marketing efforts. This will allow us to understand your needs and tailor our services to best fit your requirements." },
+  { title: "Reporting and Communication", duration: "Weekly",     desc: "During the initial consultation, we will discuss your business goals and objectives, target audience, and current marketing efforts. This will allow us to understand your needs and tailor our services to best fit your requirements." },
+  { title: "Continual Improvement",       duration: "Monthly",    desc: "During the initial consultation, we will discuss your business goals and objectives, target audience, and current marketing efforts. This will allow us to understand your needs and tailor our services to best fit your requirements." }
 ];
 
 export function FAQSection() {
@@ -38,7 +38,11 @@ export function FAQSection() {
                     : 'bg-[#0a0a0a] text-[#F1F6F4] border-[#114C5A] hover:border-[#114C5A]/80'
                 }`}
               >
-                <button 
+                <button
+                  type="button"
+                  aria-expanded={isOpen}
+                  aria-label={`${process.title} — ${process.duration}`}
+                  title={`${process.title} (${process.duration})`}
                   className="w-full flex items-center justify-between px-6 md:px-10 py-6 md:py-8 text-left cursor-pointer group"
                   onClick={() => setOpen(isOpen ? null : i)}
                 >
@@ -46,8 +50,13 @@ export function FAQSection() {
                     <span className="text-4xl md:text-5xl font-medium">
                       {String(i + 1).padStart(2, '0')}
                     </span>
-                    <span className="text-xl md:text-2xl font-medium group-hover:translate-x-2 transition-transform duration-300">
-                      {process.title}
+                    <span className="flex flex-col">
+                      <span className="text-xl md:text-2xl font-medium group-hover:translate-x-2 transition-transform duration-300">
+                        {process.title}
+                      </span>
+                      <span className="font-mono text-[10px] tracking-widest uppercase opacity-60 mt-1">
+                        {process.duration}
+                      </span>
                     </span>
                   </div>
                   <div className={`w-10 h-10 md:w-12 md:h-12 rounded-full border-[1.5px] flex items-center justify-center flex-shrink-0 transition-all duration-300 ${

@@ -14,15 +14,23 @@ export function Stats() {
           <h2 className="text-3xl md:text-4xl font-medium leading-tight mb-8 text-[#F1F6F4]">
             Quantifiable impact across every deployment. We measure success by the speed and scale of your neural ops.
           </h2>
-          <button 
-            onClick={() => showToast('View Report Initiated')}
-            className="btn-hover-arrow inline-flex items-center border border-[#114C5A] pl-4 pr-6 py-2 rounded-sm text-sm text-[#F1F6F4] hover:bg-[#114C5A]/10 transition-colors cursor-pointer"
-          >
-            <span className="mr-4 w-6 h-6 flex items-center justify-center bg-[#FFC801] text-[#172B36] rounded-sm">
-              <ChevronRight className="w-3 h-3" />
-            </span>
-            View Report
-          </button>
+          <div>
+            <button
+              type="button"
+              onClick={() => showToast('View Report Initiated')}
+              aria-label="View the Q1 2026 deployment performance report"
+              title="Open the full Q1 2026 deployment performance report"
+              className="btn-hover-arrow inline-flex items-center border border-[#114C5A] pl-4 pr-6 py-2 rounded-sm text-sm text-[#F1F6F4] hover:bg-[#114C5A]/10 transition-colors cursor-pointer"
+            >
+              <span className="mr-4 w-6 h-6 flex items-center justify-center bg-[#FFC801] text-[#172B36] rounded-sm">
+                <ChevronRight className="w-3 h-3" />
+              </span>
+              View Report
+            </button>
+            <p className="font-mono text-[11px] text-[#D9E8E2]/55 tracking-wide mt-3 uppercase">
+              Q1 2026 &middot; 38 pages &middot; PDF + interactive dashboard
+            </p>
+          </div>
         </div>
 
         <Reveal stagger className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-3 gap-8 border-t lg:border-t-0 lg:border-l border-[#114C5A] lg:pl-12 pt-8 lg:pt-0">
@@ -43,4 +51,3 @@ export function Stats() {
     </section>
   );
 }
-

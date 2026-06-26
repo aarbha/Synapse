@@ -8,7 +8,8 @@ export function BongoCat() {
           Helping people enjoy more
         </h2>
         <p className="text-[#D9E8E2]/70">
-          Even AI infrastructure needs a break sometimes. Take a moment to vibe with Bongo Cat.
+          Let the agents handle the heavy lifting. You focus on the things that actually
+          matter &mdash; sit back, breathe out, and let Bongo play a beat while the machines do the work.
         </p>
       </div>
       

@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import { Lock, Layers, Server, Database, Plus, Settings, Box } from 'lucide-react';
 import { motion, useScroll, useTransform, MotionValue } from 'framer-motion';
 import { Reveal } from './Reveal';
+import { showToast } from '../lib/toast';
 
 const Word = ({ children, progress, range }: { children: string, progress: MotionValue<number>, range: [number, number] }) => {
   const opacity = useTransform(progress, range, [0.15, 1]);
@@ -62,15 +63,26 @@ export function Features() {
 
       <Reveal stagger className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 border-t border-l border-[#114C5A] bg-black">
         {[
-          { icon: Lock, title: "Secure Guard", desc: "We fortify your AI deployments with robust security protocols. Our team ensures every model adheres to strict data privacy standards." },
-          { icon: Layers, title: "Agent Build", desc: "Tailored AI agents designed for your specific needs. We develop custom logic and workflows that integrate deeply with your existing tools." },
-          { icon: Server, title: "Cloud Scale", desc: "Infrastructure optimization for high-traffic AI apps. We ensure your systems remain fast, responsive, and ready for any level of demand." },
-          { icon: Database, title: "Data Mining", desc: "Transform raw information into actionable intelligence. We build the pipelines and vector stores that power your organization's future." }
+          { icon: Lock, title: "Secure Guard", hint: "SOC 2 · HIPAA · GDPR", desc: "We fortify your AI deployments with robust security protocols. Our team ensures every model adheres to strict data privacy standards." },
+          { icon: Layers, title: "Agent Build", hint: "Custom flows · any model", desc: "Tailored AI agents designed for your specific needs. We develop custom logic and workflows that integrate deeply with your existing tools." },
+          { icon: Server, title: "Cloud Scale", hint: "12 ms p95 · global edge", desc: "Infrastructure optimization for high-traffic AI apps. We ensure your systems remain fast, responsive, and ready for any level of demand." },
+          { icon: Database, title: "Data Mining", hint: "Vector + warehouse ready", desc: "Transform raw information into actionable intelligence. We build the pipelines and vector stores that power your organization's future." }
         ].map((feat, i) => (
-          <div key={i} className="p-8 border-b border-r border-[#114C5A] hover:bg-[#114C5A]/10 hover-glow transition-all duration-300 group cursor-pointer relative overflow-hidden">
+          <div
+            key={i}
+            role="button"
+            tabIndex={0}
+            aria-label={`${feat.title} — ${feat.desc}`}
+            title={feat.desc}
+            onClick={() => showToast(feat.title)}
+            className="p-8 border-b border-r border-[#114C5A] hover:bg-[#114C5A]/10 hover-glow transition-all duration-300 group cursor-pointer relative overflow-hidden"
+          >
             <feat.icon className="w-8 h-8 mb-6 text-[#114C5A] group-hover:text-[#FFC801] group-hover:-translate-y-1 transition-all duration-300" strokeWidth={1.5} />
             <h3 className="text-lg font-medium mb-3 text-[#F1F6F4]">{feat.title}</h3>
-            <p className="text-[#D9E8E2]/70 text-sm leading-relaxed">{feat.desc}</p>
+            <p className="text-[#D9E8E2]/70 text-sm leading-relaxed mb-4">{feat.desc}</p>
+            <p className="font-mono text-[10px] tracking-widest uppercase text-[#114C5A] group-hover:text-[#FFC801] transition-colors">
+              {feat.hint} &rarr;
+            </p>
           </div>
         ))}
       </Reveal>

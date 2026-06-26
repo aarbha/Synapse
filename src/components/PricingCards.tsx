@@ -122,17 +122,32 @@ export function PricingCards() {
                 </span>
               </p>
 
-              <button
-                type="button"
-                onClick={() => showToast(`${tier.name}: ${tier.cta}`)}
-                className={`font-mono w-full mt-2 inline-flex items-center justify-center gap-2 h-11 px-5 rounded-xl text-[13px] font-semibold tracking-wider uppercase cursor-pointer transition-all duration-200 ease-out ${
-                  isFeatured
-                    ? 'bg-[#FFC801] text-[#172B36] border border-[#FFC801] hover:bg-[#FF9932] hover:border-[#FF9932] hover:-translate-y-px hover:shadow-[0_8px_24px_-8px_rgba(255,200,1,0.45)]'
-                    : 'bg-[#172B36] text-[#F1F6F4] border border-[#172B36] hover:bg-[#114C5A] hover:border-[#114C5A] hover:-translate-y-px'
-                }`}
-              >
-                {tier.cta}
-              </button>
+              <div className="mt-2">
+                <button
+                  type="button"
+                  onClick={() => showToast(`${tier.name}: ${tier.cta}`)}
+                  aria-label={`${tier.cta} for the ${tier.name} plan`}
+                  title={
+                    tierId === 'starter'
+                      ? 'Start your free 14-day trial — no credit card required'
+                      : tierId === 'pro'
+                      ? 'Start your 14-day Pro trial — cancel anytime'
+                      : 'Talk to our sales team about a custom Enterprise contract'
+                  }
+                  className={`font-mono w-full inline-flex items-center justify-center gap-2 h-11 px-5 rounded-xl text-[13px] font-semibold tracking-wider uppercase cursor-pointer transition-all duration-200 ease-out ${
+                    isFeatured
+                      ? 'bg-[#FFC801] text-[#172B36] border border-[#FFC801] hover:bg-[#FF9932] hover:border-[#FF9932] hover:-translate-y-px hover:shadow-[0_8px_24px_-8px_rgba(255,200,1,0.45)]'
+                      : 'bg-[#172B36] text-[#F1F6F4] border border-[#172B36] hover:bg-[#114C5A] hover:border-[#114C5A] hover:-translate-y-px'
+                  }`}
+                >
+                  {tier.cta}
+                </button>
+                <p className="font-mono text-[10px] text-[#172B36]/60 tracking-wider uppercase text-center mt-2.5">
+                  {tierId === 'starter' && 'No card required · 14-day trial'}
+                  {tierId === 'pro' && 'Card required · cancel anytime · full features'}
+                  {tierId === 'enterprise' && 'Custom contract · dedicated CSM · 99.99% SLA'}
+                </p>
+              </div>
 
               <ul className="flex flex-col gap-3 mt-2 pt-6 border-t border-[#172B36]/10">
                 {tier.features.map((feature) => (

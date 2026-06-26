@@ -10,7 +10,7 @@ const caseStudies = [
     title: 'Cigna Smart Health Systems',
     desc: 'Revolutionizing patient care through predictive analytics and seamless AI-driven diagnostic integration tools.',
     color: 'bg-gradient-to-br from-[#D9E8E2] to-[#F1F6F4]',
-    logo: 'Cigna'
+    logo: 'Cigna',
   },
   {
     id: 'aetna',
@@ -18,7 +18,7 @@ const caseStudies = [
     title: 'Aetna Health Data Ecosystem',
     desc: 'We automated Aetna\'s member data management using secure AI to provide personalized care and clinical insights.',
     color: 'bg-gradient-to-br from-[#FFC801] to-[#FF9932]',
-    logo: 'aetna'
+    logo: 'aetna',
   },
   {
     id: 'anthem',
@@ -26,8 +26,8 @@ const caseStudies = [
     title: 'Anthem Neural Care Network',
     desc: 'We deployed a custom LLM to automate Anthem\'s provider relations, reducing ticket latency by eighty-five percent.',
     color: 'bg-gradient-to-br from-[#FF9932] to-[#D9E8E2]',
-    logo: 'Anthem'
-  }
+    logo: 'Anthem',
+  },
 ];
 
 export function CaseStudies() {
@@ -50,9 +50,9 @@ export function CaseStudies() {
 
           {/* Dynamic Image Area */}
           <div className="mt-auto relative w-full aspect-[4/3] rounded bg-[#D9E8E2] overflow-hidden shadow-2xl">
-            {caseStudies.map(study => (
-              <div 
-                key={study.id} 
+            {caseStudies.map((study) => (
+              <div
+                key={study.id}
                 className={`absolute inset-0 transition-all duration-1000 ease-out flex flex-col items-center justify-center ${study.color} ${hovered === study.id ? 'opacity-100 z-10 scale-100' : 'opacity-0 z-0 scale-105'}`}
               >
                 <div className="text-5xl font-bold opacity-30 mix-blend-multiply tracking-tighter">{study.logo}</div>
@@ -66,11 +66,15 @@ export function CaseStudies() {
         <div className="flex flex-col justify-end pt-12 lg:pt-0">
           <div className="border-t border-[#172B36]/10">
             {caseStudies.map((study) => (
-              <div 
+              <button
+                type="button"
                 key={study.id}
                 onMouseEnter={() => setHovered(study.id)}
+                onFocus={() => setHovered(study.id)}
                 onClick={() => showToast(`View ${study.title}`)}
-                className="group border-b border-[#172B36]/10 py-10 flex flex-col md:flex-row md:items-start gap-4 md:gap-12 cursor-pointer hover:bg-[#172B36]/[0.02] transition-colors px-4 -mx-4 rounded-sm"
+                aria-label={`${study.title} — ${study.desc}`}
+                title={study.desc}
+                className="group w-full text-left border-b border-[#172B36]/10 py-10 flex flex-col md:flex-row md:items-start gap-4 md:gap-12 cursor-pointer hover:bg-[#172B36]/[0.02] transition-colors px-4 -mx-4 rounded-sm bg-transparent"
               >
                 <div className="font-mono text-xs text-[#114C5A] pt-2 w-16">// {study.year}</div>
                 <div className="flex-1">
@@ -84,12 +88,15 @@ export function CaseStudies() {
                 <div className="pt-2 transform -translate-x-4 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all duration-300">
                   <ChevronRight className="w-6 h-6 text-[#172B36]/50" />
                 </div>
-              </div>
+              </button>
             ))}
           </div>
-          <div className="mt-12 flex">
-            <button 
+          <div className="mt-12">
+            <button
+              type="button"
               onClick={() => showToast('More Projects Directory')}
+              aria-label="Browse the full case study archive"
+              title="Browse 12+ enterprise deployments in the case archive"
               className="btn-hover-arrow inline-flex items-center border border-[#172B36]/20 pl-4 pr-6 py-2 rounded-sm text-sm hover:bg-[#172B36]/5 transition-colors cursor-pointer"
             >
               <span className="mr-4 w-6 h-6 flex items-center justify-center bg-[#172B36] text-[#FFC801] rounded-sm">
@@ -97,10 +104,12 @@ export function CaseStudies() {
               </span>
               More Projects
             </button>
+            <p className="font-mono text-[11px] text-[#172B36]/55 tracking-wide mt-3 uppercase">
+              12+ enterprise case studies &middot; full archive with metrics
+            </p>
           </div>
         </div>
       </Reveal>
     </section>
   );
 }
-
