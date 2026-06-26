@@ -118,13 +118,6 @@
   background: rgba(241, 246, 244, 0.08);
 }
 
-.linkActive,
-.linkActive:hover,
-.linkActive:focus-visible {
-  color: var(--text-on-dark);
-  background: rgba(241, 246, 244, 0.12);
-}
-
 /* "Get started" CTA with gradient border ring on hover */
 .cta {
   position: relative;
@@ -259,12 +252,6 @@
 .mobileLink:hover {
   background: rgba(255, 200, 1, 0.06);
   color: var(--color-forsythia);
-}
-
-.mobileLinkActive,
-.mobileLinkActive:hover {
-  background: rgba(241, 246, 244, 0.12);
-  color: var(--text-on-dark);
 }
 
 @media (min-width: 768px) {

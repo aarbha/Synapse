@@ -1,6 +1,7 @@
 /* =========================================================
    Synapse — Global Styles
    MP025 Locked Palette · JetBrains Mono (display) + Inter (body)
+   Pricing page only
    ========================================================= */
 
 :root {
@@ -33,18 +34,15 @@
   --font-display: 'JetBrains Mono', ui-monospace, monospace;
   --font-body: 'Inter', system-ui, -apple-system, sans-serif;
 
-  /* Timing — strict per spec */
+  /* Timing */
   --timing-micro: 150ms;
-  --timing-micro-max: 200ms;
   --timing-layout: 300ms;
-  --timing-layout-max: 400ms;
   --ease-out: cubic-bezier(0, 0, 0.2, 1);
   --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
 
   /* Layout */
   --shell-max: 1200px;
   --gutter: 24px;
-  --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 20px;
 }
@@ -116,7 +114,7 @@ p {
   font-family: var(--font-body);
 }
 
-/* ----- Focus visibility (Forsythia on dark, Oceanic Noir on light) ----- */
+/* ----- Focus visibility ----- */
 :focus-visible {
   outline: 2px solid var(--color-forsythia);
   outline-offset: 2px;
@@ -143,146 +141,10 @@ p {
     transform var(--timing-layout) var(--ease-in-out);
 }
 
-/* ----- Keyframes (hardware-accelerated: transform + opacity only) ----- */
-@keyframes fadeSlideUp {
-  from { opacity: 0; transform: translateY(24px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes scaleIn {
-  from { opacity: 0; transform: scale(0.95); }
-  to   { opacity: 1; transform: scale(1); }
-}
-
-@keyframes pulseGlow {
-  0%, 100% { opacity: 0.7; transform: scale(1); }
-  50%      { opacity: 1;   transform: scale(1.06); }
-}
-
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
-}
-
-/* Hero gradient mesh — slow, subtle drift using only MP025 colors */
-@keyframes meshDriftA {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50%      { transform: translate(4%, -3%) scale(1.08); }
-}
-@keyframes meshDriftB {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50%      { transform: translate(-5%, 4%) scale(1.12); }
-}
-@keyframes meshDriftC {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  50%      { transform: translate(3%, 5%) scale(0.95); }
-}
-
-/* Scroll indicator, role cycling, entrance reveals */
-@keyframes scroll-down {
-  0%   { transform: translateY(-100%); }
-  100% { transform: translateY(200%); }
-}
-
-@keyframes role-fade-in {
-  from { opacity: 0; transform: translateY(8px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes gradient-shift {
-  0%   { background-position: 0% 50%; }
-  50%  { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-@keyframes name-reveal {
-  from { opacity: 0; transform: translateY(50px); filter: blur(10px); }
-  to   { opacity: 1; transform: translateY(0);    filter: blur(0); }
-}
-
-@keyframes blur-in {
-  from { opacity: 0; transform: translateY(20px); filter: blur(10px); }
-  to   { opacity: 1; transform: translateY(0);    filter: blur(0); }
-}
-
-@keyframes scale-in {
-  from { opacity: 0; transform: scale(0.92); }
-  to   { opacity: 1; transform: scale(1); }
-}
-
+/* ----- Status pulse keyframe (used by Footer status dot) ----- */
 @keyframes pulse-dot {
   0%, 100% { opacity: 1; transform: scale(1); }
   50%      { opacity: 0.55; transform: scale(0.85); }
-}
-
-@keyframes slide-up {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes hero-pill-glow {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 200, 1, 0.35); }
-  50%      { box-shadow: 0 0 0 8px rgba(255, 200, 1, 0); }
-}
-
-/* ----- Entry animations ----- */
-.enter-fade-up {
-  animation: fadeSlideUp 400ms var(--ease-in-out) both;
-}
-.enter-scale {
-  animation: scaleIn 350ms var(--ease-out) both;
-}
-
-/* ----- Portfolio-style entrances ----- */
-.animate-scroll-down {
-  animation: scroll-down 1.5s ease-in-out infinite;
-}
-.animate-role-fade-in {
-  animation: role-fade-in 0.4s ease-out both;
-  display: inline-block;
-}
-.name-reveal {
-  animation: name-reveal 1.2s var(--ease-in-out) 0.1s both;
-}
-.blur-in {
-  animation: blur-in 1s var(--ease-out) 0.3s both;
-}
-.slide-up {
-  animation: slide-up 0.8s var(--ease-out) both;
-}
-.scale-in {
-  animation: scale-in 0.5s var(--ease-out) both;
-}
-
-/* ----- Accent gradient (Forsythia → Deep Saffron linear) ----- */
-.accent-gradient {
-  background: linear-gradient(90deg, var(--color-forsythia) 0%, var(--color-deep-saffron) 100%);
-}
-
-/* ----- Hero pill glow (Forsythia dot) ----- */
-.hero-dot {
-  animation: pulse-dot 2.4s ease-in-out infinite;
-}
-
-/* ----- Section header pattern (eyebrow + heading + subtext + view-all) ----- */
-.section-header {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  margin-bottom: 56px;
-}
-
-/* Below-fold reveal */
-.reveal {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 400ms var(--ease-in-out), transform 400ms var(--ease-in-out);
-  will-change: opacity, transform;
-}
-.reveal.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-  will-change: auto;
 }
 
 /* ----- Shell ----- */
@@ -335,17 +197,6 @@ p {
 }
 .btn-primary:active { transform: translateY(0); }
 
-.btn-ghost {
-  background: transparent;
-  color: var(--text-on-dark);
-  border: 1px solid var(--border-dark);
-}
-.btn-ghost:hover {
-  background: rgba(255, 200, 1, 0.06);
-  border-color: var(--color-forsythia);
-  color: var(--color-forsythia);
-}
-
 .btn-light {
   background: var(--color-oceanic-noir);
   color: var(--color-arctic-powder);
@@ -357,59 +208,7 @@ p {
   transform: translateY(-1px);
 }
 
-.btn-light-ghost {
-  background: transparent;
-  color: var(--color-oceanic-noir);
-  border: 1px solid var(--border-light);
-}
-.btn-light-ghost:hover {
-  background: rgba(23, 43, 54, 0.04);
-  border-color: var(--color-oceanic-noir);
-}
-
-/* ----- Card surface (dark) ----- */
-.card {
-  background: var(--color-nocturnal);
-  border: 1px solid var(--border-dark);
-  border-radius: var(--radius-lg);
-  padding: 24px;
-}
-
-/* ----- Bento/Accordion visibility (CSS only) ----- */
-.bento-grid { display: none; }
-.accordion-stack { display: block; }
-
-@media (min-width: 768px) {
-  .bento-grid { display: grid; }
-  .accordion-stack { display: none; }
-}
-
-/* ----- Marquee ----- */
-.marquee {
-  overflow: hidden;
-  mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
-  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%);
-}
-.marquee-track {
-  display: flex;
-  gap: 48px;
-  width: max-content;
-  animation: marquee 40s linear infinite;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.001ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.001ms !important;
-  }
-  .marquee-track { animation: none; }
-  .fallbackOrb1, .fallbackOrb2, .fallbackOrb3 { animation: none; }
-  .animate-scroll-down,
-  .hero-dot { animation: none; }
-}
-
-/* ----- Section spacing ----- */
+/* ----- Section spacing & variants ----- */
 .section {
   padding-block: 96px;
   position: relative;
@@ -418,18 +217,14 @@ p {
   .section { padding-block: 128px; }
 }
 
-/* ----- Section variants ----- */
-.section-dark {
-  background: var(--bg-primary);
-  color: var(--text-on-dark);
-}
-.section-secondary {
-  background: var(--bg-secondary);
-  color: var(--text-on-dark);
-}
 .section-light {
   background: var(--bg-light);
   color: var(--text-on-light);
+}
+
+.section-dark {
+  background: var(--bg-primary);
+  color: var(--text-on-dark);
 }
 
 /* ----- Selection ----- */
@@ -447,3 +242,11 @@ p {
   border: 2px solid var(--bg-primary);
 }
 ::-webkit-scrollbar-thumb:hover { background: #1d5566; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

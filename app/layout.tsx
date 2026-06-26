@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from 'next';
 import { JetBrains_Mono, Inter } from 'next/font/google';
-import Script from 'next/script';
 import './globals.css';
 
 const jetbrainsMono = JetBrains_Mono({
@@ -19,9 +18,9 @@ const inter = Inter({
 
 const SITE_URL = 'https://synapse-ai.vercel.app';
 const SITE_NAME = 'Synapse';
-const TITLE = 'Synapse — Where workflows interact';
+const TITLE = 'Synapse — Pricing';
 const DESCRIPTION =
-  'Premium AI automation platform that orchestrates workflows across your stack. Intelligent agents, real-time analytics, enterprise-grade security.';
+  'Simple, transparent pricing for Synapse. Choose Starter, Pro, or Enterprise — billed monthly or annually, in USD, EUR, or INR.';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -31,12 +30,10 @@ export const metadata: Metadata = {
   },
   description: DESCRIPTION,
   keywords: [
-    'AI automation',
-    'workflow automation',
-    'artificial intelligence',
-    'SaaS platform',
-    'AI agents',
-    'orchestration',
+    'Synapse pricing',
+    'AI automation pricing',
+    'workflow automation cost',
+    'SaaS pricing',
     'Synapse',
   ],
   authors: [{ name: 'Synapse Team' }],
@@ -52,7 +49,7 @@ export const metadata: Metadata = {
     title: TITLE,
     description: DESCRIPTION,
     images: [
-      { url: '/og-image.png', width: 1200, height: 630, alt: 'Synapse — Where workflows interact' },
+      { url: '/og-image.png', width: 1200, height: 630, alt: 'Synapse — Pricing' },
     ],
   },
   twitter: {
@@ -83,29 +80,7 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${jetbrainsMono.variable} ${inter.variable}`}>
-      <body>
-        {children}
-        <Script id="below-fold-reveal" strategy="lazyOnload">
-          {`
-            (function () {
-              if (typeof window === 'undefined') return;
-              if (!('IntersectionObserver' in window)) {
-                document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('is-visible'); });
-                return;
-              }
-              var io = new IntersectionObserver(function (entries) {
-                entries.forEach(function (entry) {
-                  if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible');
-                    io.unobserve(entry.target);
-                  }
-                });
-              }, { rootMargin: '0px 0px -10% 0px', threshold: 0.05 });
-              document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
-            })();
-          `}
-        </Script>
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
