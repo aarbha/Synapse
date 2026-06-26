@@ -9,24 +9,24 @@ const caseStudies = [
     year: '2026',
     title: 'Cigna Smart Health Systems',
     desc: 'Revolutionizing patient care through predictive analytics and seamless AI-driven diagnostic integration tools.',
-    color: 'bg-gradient-to-br from-[#D9E8E2] to-[#F1F6F4]',
-    logo: 'Cigna',
+    image: '/case-studies/cigna-healthcare.png',
+    fallback: { color: 'bg-gradient-to-br from-[#D9E8E2] to-[#F1F6F4]', logo: 'Cigna' },
   },
   {
     id: 'aetna',
     year: '2026',
     title: 'Aetna Health Data Ecosystem',
     desc: 'We automated Aetna\'s member data management using secure AI to provide personalized care and clinical insights.',
-    color: 'bg-gradient-to-br from-[#FFC801] to-[#FF9932]',
-    logo: 'aetna',
+    image: '/case-studies/aetna-datasystem.png',
+    fallback: { color: 'bg-gradient-to-br from-[#FFC801] to-[#FF9932]', logo: 'aetna' },
   },
   {
     id: 'anthem',
     year: '2026',
     title: 'Anthem Neural Care Network',
     desc: 'We deployed a custom LLM to automate Anthem\'s provider relations, reducing ticket latency by eighty-five percent.',
-    color: 'bg-gradient-to-br from-[#FF9932] to-[#D9E8E2]',
-    logo: 'Anthem',
+    image: '/case-studies/anthem-neural.png',
+    fallback: { color: 'bg-gradient-to-br from-[#FF9932] to-[#D9E8E2]', logo: 'Anthem' },
   },
 ];
 
@@ -51,11 +51,21 @@ export function CaseStudies() {
           {/* Dynamic Image Area */}
           <div className="mt-auto relative w-full aspect-[4/3] rounded bg-[#D9E8E2] overflow-hidden shadow-2xl">
             {caseStudies.map((study) => (
-              <div
+              <img
                 key={study.id}
-                className={`absolute inset-0 transition-all duration-1000 ease-out flex flex-col items-center justify-center ${study.color} ${hovered === study.id ? 'opacity-100 z-10 scale-100' : 'opacity-0 z-0 scale-105'}`}
+                src={study.image}
+                alt={study.title}
+                loading="lazy"
+                className={`absolute inset-0 w-full h-full object-cover transition-all duration-1000 ease-out ${hovered === study.id ? 'opacity-100 z-10 scale-100' : 'opacity-0 z-0 scale-105'}`}
+                onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
+              />
+            ))}
+            {caseStudies.map((study) => (
+              <div
+                key={`fallback-${study.id}`}
+                className={`absolute inset-0 transition-all duration-1000 ease-out flex flex-col items-center justify-center ${study.fallback.color} ${hovered === study.id ? 'opacity-0 z-0' : 'opacity-100 z-0'}`}
               >
-                <div className="text-5xl font-bold opacity-30 mix-blend-multiply tracking-tighter">{study.logo}</div>
+                <div className="text-5xl font-bold opacity-30 mix-blend-multiply tracking-tighter">{study.fallback.logo}</div>
                 <div className="absolute inset-0 bg-[#172B36]/5 mix-blend-overlay"></div>
               </div>
             ))}
