@@ -5,9 +5,12 @@ import { NAV_LINKS } from '@/lib/constants';
 import { PkgIcon } from './IconsRef';
 import styles from './NavBar.module.css';
 
+const SECTION_IDS = ['hero', 'features', 'pricing', 'testimonials'];
+
 export function NavBar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [activeId, setActiveId] = useState<string>('hero');
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
@@ -15,6 +18,44 @@ export function NavBar() {
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  // Active-link IntersectionObserver: marks whichever section the user is
+  // currently reading. Uses rootMargin to bias the activation toward the
+  // top half of the viewport.
+  useEffect(() => {
+    if (typeof window === 'undefined' || !('IntersectionObserver' in window)) return;
+
+    const elements = SECTION_IDS
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => el !== null);
+
+    if (elements.length === 0) return;
+
+    const visible = new Map<Element, number>();
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            visible.set(entry.target, entry.intersectionRatio);
+          } else {
+            visible.delete(entry.target);
+          }
+        }
+        if (visible.size > 0) {
+          // Pick the topmost visible section (first in document order)
+          const topmost = elements.find((el) => visible.has(el));
+          if (topmost?.id) setActiveId(topmost.id);
+        }
+      },
+      {
+        // Activate when section enters top 40% of viewport
+        rootMargin: '-40% 0px -55% 0px',
+        threshold: [0, 0.25, 0.5, 0.75, 1],
+      }
+    );
+    elements.forEach((el) => io.observe(el));
+    return () => io.disconnect();
   }, []);
 
   useEffect(() => {
@@ -51,17 +92,22 @@ export function NavBar() {
           <span className={styles.divider} aria-hidden="true" />
 
           <ul className={styles.links}>
-            {NAV_LINKS.map((link) => (
-              <li key={link.href}>
-                <a
-                  href={link.href}
-                  className={`${styles.link} font-display interactive`}
-                  onClick={closeMenu}
-                >
-                  {link.label}
-                </a>
-              </li>
-            ))}
+            {NAV_LINKS.map((link) => {
+              const id = link.href.replace(/^#/, '');
+              const isActive = activeId === id;
+              return (
+                <li key={link.href}>
+                  <a
+                    href={link.href}
+                    className={`${styles.link} font-display interactive ${isActive ? styles.linkActive : ''}`}
+                    aria-current={isActive ? 'page' : undefined}
+                    onClick={closeMenu}
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              );
+            })}
           </ul>
 
           <span className={styles.divider} aria-hidden="true" />
@@ -106,17 +152,22 @@ export function NavBar() {
         hidden={!open}
       >
         <ul className={styles.mobileLinks}>
-          {NAV_LINKS.map((link) => (
-            <li key={link.href}>
-              <a
-                href={link.href}
-                className={`${styles.mobileLink} font-display`}
-                onClick={closeMenu}
-              >
-                {link.label}
-              </a>
-            </li>
-          ))}
+          {NAV_LINKS.map((link) => {
+            const id = link.href.replace(/^#/, '');
+            const isActive = activeId === id;
+            return (
+              <li key={link.href}>
+                <a
+                  href={link.href}
+                  className={`${styles.mobileLink} font-display ${isActive ? styles.mobileLinkActive : ''}`}
+                  aria-current={isActive ? 'page' : undefined}
+                  onClick={closeMenu}
+                >
+                  {link.label}
+                </a>
+              </li>
+            );
+          })}
           <li>
             <a href="#pricing" className="btn btn-primary" onClick={closeMenu}>
               Get started

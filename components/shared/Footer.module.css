@@ -1,17 +1,35 @@
-/* Footer — marquee banner + email CTA + brand/columns/trust/status dot */
+/* Footer — video-backed marquee banner + email CTA + brand/columns/trust/status dot */
 
 .wrap {
   position: relative;
   background: var(--bg-primary);
-  border-top: 1px solid var(--border-dark);
   margin-top: 96px;
   padding-bottom: 0;
 }
 
+/* Video-backed band: contains marquee + CTA over a flipped HLS video */
+.videoBand {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border-top: 1px solid var(--border-dark);
+  border-bottom: 1px solid var(--border-dark);
+}
+
+.video {
+  position: absolute !important;
+  inset: 0;
+  z-index: 0;
+}
+
+.videoBandInner {
+  position: relative;
+  z-index: 1;
+}
+
 /* Big marquee banner (portfolio pattern) */
 .marqueeBar {
-  padding-block: 48px 64px;
-  border-bottom: 1px solid var(--border-dark);
+  padding-block: 56px 80px;
   overflow: hidden;
 }
 
@@ -39,16 +57,18 @@
   gap: 64px;
 }
 
-/* CTA block above footer columns */
+/* CTA shell — wraps the video-band CTA so it sits inside the shell gutter */
+.ctaShell {
+  padding-bottom: 96px;
+}
+
+/* CTA block inside the video band */
 .ctaBlock {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
   text-align: center;
-  padding-block: 32px;
-  border-bottom: 1px solid var(--border-dark);
-  padding-bottom: 64px;
 }
 
 .eyebrow {

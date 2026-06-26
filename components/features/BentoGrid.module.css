@@ -44,6 +44,11 @@
   z-index: 0;
   pointer-events: none;
   overflow: hidden;
+  background-image: radial-gradient(circle, rgba(23, 43, 54, 0.85) 1px, transparent 1px);
+  background-size: 4px 4px;
+  background-position: 0 0;
+  mix-blend-mode: multiply;
+  opacity: 0.2;
 }
 
 .bgOrb1,

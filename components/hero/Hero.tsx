@@ -1,13 +1,13 @@
+import { HeroVideo } from './HeroVideo';
 import styles from './Hero.module.css';
+
+const HLS_SRC =
+  'https://stream.mux.com/Aa02T7oM1wH5Mk5EEVDYhbZ1ChcdhRsS2m1NYyx4Ua1g.m3u8';
 
 export function Hero() {
   return (
     <div className={styles.hero}>
-      <div className="hero-bg" aria-hidden="true">
-        <span className="hero-blob-c" />
-      </div>
-      <div className="hero-grid" aria-hidden="true" />
-      <div className="hero-fade" aria-hidden="true" />
+      <HeroVideo src={HLS_SRC} />
 
       <div className={`shell ${styles.content}`}>
         <span className={`${styles.pill} font-display blur-in`}>

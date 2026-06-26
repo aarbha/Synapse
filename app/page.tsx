@@ -1,21 +1,21 @@
 import { NavBar } from '@/components/shared/NavBar';
 import { Footer } from '@/components/shared/Footer';
-import { PageClient } from './PageClient';
 import { Hero } from '@/components/hero/Hero';
 import { FeatureSection } from '@/components/features/FeatureSection';
 import { Journal } from '@/components/journal/Journal';
+import { Explorations } from '@/components/explorations/Explorations';
 import { Stats } from '@/components/stats/Stats';
 import { PricingSection } from '@/components/pricing/PricingSection';
 import { Testimonials } from '@/components/social-proof/Testimonials';
 
 export default function Home() {
   return (
-    <PageClient>
-      <main>
-        <header role="banner">
-          <NavBar />
-        </header>
+    <>
+      <header role="banner">
+        <NavBar />
+      </header>
 
+      <main>
         <section id="hero" aria-label="Synapse — AI Automation Platform">
           <Hero />
         </section>
@@ -34,6 +34,14 @@ export default function Home() {
           className="reveal"
         >
           <Journal />
+        </section>
+
+        <section
+          id="explorations"
+          aria-label="Visual exploration gallery"
+          className="reveal"
+        >
+          <Explorations />
         </section>
 
         <section
@@ -62,6 +70,6 @@ export default function Home() {
       </main>
 
       <Footer />
-    </PageClient>
+    </>
   );
 }

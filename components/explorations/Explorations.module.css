@@ -1,0 +1,272 @@
+/* Explorations — scroll-revealed 2-column parallax gallery */
+
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+  position: relative;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  text-align: center;
+  max-width: 720px;
+  margin-inline: auto;
+}
+
+.eyebrowRow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.eyebrowRule {
+  width: 32px;
+  height: 1px;
+  background: var(--border-dark);
+  display: inline-block;
+}
+
+.eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--text-muted-dark);
+  font-weight: 500;
+}
+
+.title {
+  font-size: clamp(34px, 5vw, 56px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  color: var(--text-on-dark);
+}
+
+.titleItalic {
+  font-style: italic;
+  font-weight: 500;
+}
+
+.lead {
+  font-size: 16px;
+  color: var(--text-muted-dark);
+  line-height: 1.6;
+  max-width: 56ch;
+  font-family: var(--font-body);
+}
+
+/* Two-column grid for parallax */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  max-width: 1100px;
+  margin-inline: auto;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    gap: 80px;
+  }
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.colOffset {
+  padding-top: 64px;
+}
+
+@media (min-width: 768px) {
+  .colOffset { padding-top: 96px; }
+}
+
+/* Card */
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 28px;
+  background: var(--color-nocturnal);
+  border: 1px solid var(--border-dark);
+  border-radius: 18px;
+  isolation: isolate;
+  outline: none;
+  cursor: pointer;
+  color: var(--text-on-dark);
+  will-change: transform, opacity;
+  /* Reveal initial state: hidden + offset */
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 600ms var(--ease-out) var(--reveal-delay, 0ms),
+    transform 600ms var(--ease-out) var(--reveal-delay, 0ms),
+    border-color var(--timing-micro) var(--ease-out);
+}
+
+.cardRevealed {
+  opacity: 1;
+  transform: translateY(var(--parallax-y, 0));
+}
+
+.cardRevealed.cardRotated {
+  transform: translateY(var(--parallax-y, 0)) rotate(-2deg);
+}
+
+.card:hover,
+.card:focus-visible {
+  border-color: var(--color-forsythia);
+}
+
+.serial {
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--text-muted-dark);
+  font-weight: 600;
+}
+
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: relative;
+  z-index: 1;
+}
+
+.iconWrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: var(--color-oceanic-noir);
+  color: var(--color-forsythia);
+  flex-shrink: 0;
+  transition: background var(--timing-micro) var(--ease-out),
+    color var(--timing-micro) var(--ease-out);
+}
+
+.card:hover .iconWrap,
+.card:focus-visible .iconWrap {
+  background: var(--color-forsythia);
+  color: var(--color-oceanic-noir);
+}
+
+.icon { color: currentColor; }
+
+.cardTitle {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: var(--text-on-dark);
+  margin: 0;
+}
+
+.cardDesc {
+  font-size: 14px;
+  color: var(--text-muted-dark);
+  line-height: 1.55;
+  font-family: var(--font-body);
+  margin: 0;
+}
+
+/* Hover overlay + label */
+.hoverOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: rgba(23, 43, 54, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  opacity: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  transition: opacity var(--timing-micro) var(--ease-out);
+}
+
+.card:hover .hoverOverlay,
+.card:focus-visible .hoverOverlay {
+  opacity: 1;
+}
+
+.hoverLabel {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(8px);
+  pointer-events: none;
+  transition: opacity var(--timing-micro) var(--ease-out),
+    transform var(--timing-micro) var(--ease-out);
+}
+
+.card:hover .hoverLabel,
+.card:focus-visible .hoverLabel {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hoverLabelRing {
+  position: absolute;
+  inset: -2px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--color-forsythia), var(--color-deep-saffron));
+  background-size: 200% 200%;
+  animation: gradient-shift 6s ease infinite;
+}
+
+.hoverLabelInner {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: var(--color-arctic-powder);
+  color: var(--color-oceanic-noir);
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  font-family: var(--font-display);
+  white-space: nowrap;
+}
+
+.hoverLabelDash {
+  color: var(--color-deep-saffron);
+  font-weight: 700;
+}
+
+.hoverLabelName {
+  font-style: italic;
+  font-weight: 500;
+  text-transform: none;
+}
+
+@media (max-width: 640px) {
+  .colOffset { padding-top: 0; }
+  .card { padding: 22px; }
+}
