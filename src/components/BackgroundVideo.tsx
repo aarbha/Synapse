@@ -1,33 +1,54 @@
 import { useEffect, useRef } from 'react';
 
 const VIDEO_SRC = '/designarena_video.mp4';
-const SCRUB_SENSITIVITY = 0.8;
+const SCRUB_SENSITIVITY = 2.5;
+const LERP_FACTOR = 0.22;
+const DELTA_THRESHOLD = 0.05;
 
 export function BackgroundVideo() {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const prevXRef = useRef<number>(0);
+  const rawXRef = useRef<number>(0);
+  const smoothXRef = useRef<number>(0);
+  const prevSmoothXRef = useRef<number>(0);
   const targetTimeRef = useRef<number>(0);
   const isSeekingRef = useRef<boolean>(false);
+  const readyRef = useRef<boolean>(false);
 
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
 
+    let rafId: number;
+
     const onMouseMove = (e: MouseEvent) => {
-      const currentX = e.clientX;
-      const delta = currentX - prevXRef.current;
-      prevXRef.current = currentX;
-
-      const timeOffset = (delta / window.innerWidth) * SCRUB_SENSITIVITY * video.duration;
-      targetTimeRef.current = Math.max(
-        0,
-        Math.min(video.duration, targetTimeRef.current + timeOffset),
-      );
-
-      if (!isSeekingRef.current) {
-        isSeekingRef.current = true;
-        video.currentTime = targetTimeRef.current;
+      if (!readyRef.current) {
+        readyRef.current = true;
+        smoothXRef.current = e.clientX;
+        prevSmoothXRef.current = e.clientX;
       }
+      rawXRef.current = e.clientX;
+    };
+
+    const tick = () => {
+      if (readyRef.current) {
+        smoothXRef.current += (rawXRef.current - smoothXRef.current) * LERP_FACTOR;
+        const delta = smoothXRef.current - prevSmoothXRef.current;
+        prevSmoothXRef.current = smoothXRef.current;
+
+        if (Math.abs(delta) > DELTA_THRESHOLD) {
+          const timeOffset = (delta / window.innerWidth) * SCRUB_SENSITIVITY * video.duration;
+          targetTimeRef.current = Math.max(
+            0,
+            Math.min(video.duration, targetTimeRef.current + timeOffset),
+          );
+
+          if (!isSeekingRef.current) {
+            isSeekingRef.current = true;
+            video.currentTime = targetTimeRef.current;
+          }
+        }
+      }
+      rafId = requestAnimationFrame(tick);
     };
 
     const onSeeked = () => {
@@ -40,10 +61,12 @@ export function BackgroundVideo() {
 
     window.addEventListener('mousemove', onMouseMove);
     video.addEventListener('seeked', onSeeked);
+    rafId = requestAnimationFrame(tick);
 
     return () => {
       window.removeEventListener('mousemove', onMouseMove);
       video.removeEventListener('seeked', onSeeked);
+      cancelAnimationFrame(rafId);
     };
   }, []);
 
